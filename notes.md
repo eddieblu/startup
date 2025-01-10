@@ -2,6 +2,10 @@
 
 [My startup](https://simon.cs260.click)
 
+## Questions
+
+How to view commits in Github? 
+
 ## Helpful links
 
 - [Course instruction](https://github.com/webprogramming260)
