@@ -1,4 +1,4 @@
-# Your startup name here
+# Sunshine in My Soul Gratitude / Morning Breaks Gratitude
 
 [My Notes](notes.md)
 
