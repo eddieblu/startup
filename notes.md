@@ -2,9 +2,7 @@
 
 [My startup](https://simon.cs260.click)
 
-## Questions
-
-How to view commits in Github? 
+## Unresolved Questions
 
 ## Helpful links
 
