@@ -1,9 +1,8 @@
-# Sunshine in My Soul Gratitude / Morning Breaks Gratitude
+# Sunshine Gratitude
 
 [My Notes](notes.md)
 
-A brief description of the application here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
+This application is a daily gratitude web platform that encourages users to pause, reflect on their blessings, and share uplifting thoughts each day. Inspired by the beloved hymn "There Is Sunshine in My Soul Today," it creates a warm, faith-centred atmosphere where users can post a brief expression of gratitude and instantly see each others’ submissions. A simple heart-react feature fosters connection and support, while a streak counter motivates consistency in practicing daily mindfulness and gratitude. By combining a focus on thankfulness with gentle reminders of spiritual themes, the app offers a refreshing way to strengthen positivity and community online.
 
 > [!NOTE]
 >  This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
