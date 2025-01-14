@@ -20,7 +20,7 @@ Sunshine Gratitude is an innovative twist on daily gratitude, blending spiritual
 
 ### Design
 
-![Design image](placeholder.png)
+![Design image](gratitudeMockUI.jpg)
 
 The following is space for potential sequence diagrams to explain the core flows. 
 
