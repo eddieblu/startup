@@ -21,7 +21,7 @@ Scatter Sunshine is an innovative twist on daily positivity, blending spiritual 
 
 
 ### Design
-![Design image FULL SIZE](positivityMockUI.jpg)
+![Design image](positivityMockUI.jpg)
 
 
 ### Key features
