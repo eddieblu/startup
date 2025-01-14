@@ -2,12 +2,12 @@
 
 [My Notes](notes.md)
 
-Sunshine Gratitude is a daily reflection platform inspired by the beloved hymn “There Is Sunshine in My Soul Today,” encouraging short, uplifting gratitude posts in a warm, faith-centered atmosphere. Each new post unlocks a real-time community feed with instant heart reactions, while a sun icon tracks your streak. Entries automatically expire at day’s end for a fresh start every morning, and an admin-only dashboard ensures simple, secure user management.
+Sunshine Gratitude is a daily reflection platform inspired by the beloved hymn “There Is Sunshine in My Soul Today,” encouraging short, uplifting gratitude posts in a warm, faith-centered atmosphere. Each new post unlocks a real-time community feed with instant heart reactions, while a sun icon tracks your streak. Entries automatically expire at the day’s end for a fresh start every morning. 
 
 
 ## 🚀 Specification Deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+For this deliverable, I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
@@ -28,52 +28,27 @@ The following image includes design sketches for the Login, Register, Daily Grat
 
 ### Key features
 
-- Secure login over HTTPS
+- Secure login over HTTPS (via Auth0)
 - Daily 150-character gratitude posts
 - Real-time feed with heart reactions
 - Sun icon for streak tracking
 - Automatic expiry of daily entries
-- Admin dashboard for password resets
-
+- Auth0-managed password resets
   
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Uses correct HTML structure for the application. Two HTML pages (a login page and a gratitude feed page). 
-- **CSS** - Application styling that looks good on different screen sizes. Uses good whitespace, colour choice and contrast.
-- **JavaScript** - Reactivity (e.g. What happens when a user presses a button)
-- **React** - Provides registration, login, daily posting, feed display, and real-time post reactions. A separate admin route allows only admins to reset other users’ passwords.  
-- **Web Service** - Backend service with endpoints for:
-  - **/api/register** (user registration)    
-  - **/api/login** (user authentication)  
-  - **/api/gratitude** (submitting and retrieving gratitude posts)  
-  - **/api/heart** (real-time reactions)  
-  - **/api/admin/reset** (admin-only password reset)  
-- **DB/Login** - Stores users, gratitude posts, and heart-react data in database. Register and login users. Credentials securely stored in database (password hashing). Users must be authenticated to post, view posts or react. Posts older than one day are automatically removed. 
-- **WebSocket** - Broadcasts new posts and heart-reacts instantly to all connected clients for real-time feed updates.
-
-- **HTML** – Uses correct HTML structure before porting fully to React. Two HTML pages (login and gratitude feed) with correct semantic markup (<header>, <main>, <footer>, etc.).
-- **CSS** – Applies a design theme suitable for multiple screen sizes. Uses good whitespace, color choice and contrast.
-- **JavaScript** – Handles user interactions (clicking “heart," submitting a gratitude post). Updates the UI in real-time through state changes and provides instant feedback.
-- **React** –  Provides registration, login, daily posting, feed display, and real-time post reactions. A separate admin route allows only admins to reset other users’ passwords.
+- **HTML** – Uses correct HTML structure before porting fully to React. Two HTML pages (landing page and gratitude feed page). 
+- **CSS** – Applies a design theme suitable for multiple screen sizes. Uses good whitespace, colour choice and contrast.
+- **JavaScript** – Handles user interactions (clicking “heart," posting gratitude). Updates the UI in real-time through state changes.
+- **React** –  Manages daily posting, feed display, and real-time reactions.
 - **Web service** – Backend service with endpoints for:
-  - **/api/register** (user registration)    
-  - **/api/login** (user authentication)  
   - **/api/gratitude** (submitting and retrieving gratitude posts)  
-  - **/api/heart** (real-time reactions)  
-  - **/api/admin/reset** (admin-only password reset)  
-  - External Service: Will call a public “inspirational quotes” API (from GitHub’s public-apis list) to display a daily motivational quote alongside user posts.
-- **Authentication / External Service** – Users create accounts with email/password. After logging in, their username and streak progress appear on-screen, and they can post or view the feed.
-
-Database data – A rendering of application data that is stored in the database
-Stores users (with hashed passwords), gratitude posts, and heart-react counts. Automatically removes posts older than one day to refresh the feed each morning.
-
-WebSocket data – A rendering of data that is received from your server
-Broadcasts new posts and heart-reacts instantly to all connected clients, so everyone sees updates in real time without needing to refresh the page.
-
-
-
+  - **/api/heart** (tracking heart reactions in real-time)  
+- **Authentication / External Service** – Uses the **Auth0** public API for all login and registration needs.
+- **Database** – Stores user details (minus passwords), gratitude posts, and heart-react data. Automatically removes posts at midnight MST.
+- **WebSocket** – Broadcasts new posts and heart-reacts instantly to all connected clients, so everyone sees updates in real-time.
 
 
 
