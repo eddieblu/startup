@@ -11,6 +11,29 @@
 1. Do I need to include a <mark>Deployment Instructions section?</mark>
 2. Change photo in README to this: [<img src="gratitudeMockUI.jpg" alt="Alt text" width="200px" />]
 
+## Public API Notes
+How It Works
+Enable “Requires Username”
+
+In Auth0 Dashboard > Connections > Database, create or edit a Database Connection.
+Check Requires Username so that both email and username are requested at sign-up.
+Login Behavior
+
+Username-Only Login: Users enter their username and password.
+Email-Only Login: They enter their email and password.
+Username or Email Login: You can allow both by customizing your Lock widget or Universal Login to accept either value in the same input.
+Hosted Login Page / Lock Widget
+
+If you’re using Auth0’s Lock or Universal Login, you may need to enable an option like allowLoginWithEmail and allowLoginWithUsername.
+This ensures the form displays fields for both username and email at registration, and recognizes either one at login (if desired).
+Password Recovery
+
+Auth0 still relies on email to send password reset links.
+Even if you enable usernames, users need a valid email for recovery flows.
+Rules & Customization
+
+If you want additional logic (e.g., checking that usernames aren’t offensive), you can write a Rule in Auth0.
+You can also decide if you want to require email verification before the user can post.
 
 ## Helpful links
 
