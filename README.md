@@ -29,10 +29,46 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ```mermaid
 sequenceDiagram
-    actor You
-    actor Website
-    You->>Website: Replace this with your design
+    participant U as User
+    participant B as Browser (React)
+    participant S as Server
+    participant DB as Database
+
+    U->>B: Request Landing Page
+    B->>S: GET / (Landing Page Resources)
+    S->>B: Return HTML/CSS/JS
+
+    U->>B: Enter Credentials (Login)
+    B->>S: POST /api/login
+    S->>DB: Validate Credentials
+    DB->>S: Return Auth Result
+
+    alt Login Success
+        S->>B: Return Auth Token
+        B->>U: Show Main Page (Gratitude Prompt)
+
+        U->>B: Enter Daily Gratitude (<150 chars)
+        B->>S: POST /api/gratitude
+        S->>DB: Store Gratitude Entry
+        DB->>S: Acknowledgment
+        S->>B: Return Success
+
+        B->>S: (WebSocket) Subscribe to Feed
+        S->>B: Broadcast Real-Time Feed Data
+        
+        U->>B: Click "Heart" on a Post
+        B->>S: (WebSocket) Send "heart" action
+        S->>B: Broadcast Updated Heart Count
+    else Login Fail
+        S->>B: Return Error
+        B->>U: Show Login Error
+    end
 ```
+
+
+
+
+
 
 ### Key features
 
