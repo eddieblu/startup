@@ -42,10 +42,10 @@ I am going to use the required technologies in the following ways.
 - **CSS** – Applies a design theme suitable for multiple screen sizes. Uses good whitespace, colour choice and contrast.
 - **JavaScript** – Handles user interactions (clicking “heart," posting gratitude). Updates the UI in real-time through state changes.
 - **React** –  Manages daily posting, feed display, and real-time reactions.
-- **Web service** – Backend service with endpoints for:
+- **Web Service** – Backend service with endpoints for:
   - **/api/gratitude** (submitting and retrieving gratitude posts)  
   - **/api/heart** (tracking heart reactions in real-time)  
-- **Authentication / External Service** – Uses the **Auth0** public API for all login and registration needs.
+- **Authentication / External Web Service** – Uses the **Auth0** public API for all login and registration needs.
 - **Database** – Stores user details (minus passwords), gratitude posts, and heart-react data. Automatically removes posts at midnight MST.
 - **WebSocket** – Broadcasts new posts and heart-reacts instantly to all connected clients, so everyone sees updates in real-time.
 
