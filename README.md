@@ -40,11 +40,11 @@ The following image includes design sketches for the Login, Register, Daily Grat
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Uses correct HTML structure for the application. Two HTML pages (a login page and a gratitude feed page).
+- **HTML** - Uses correct HTML structure for the application. Two HTML pages (a login page and a gratitude feed page). 
 - **CSS** - Application styling that looks good on different screen sizes. Uses good whitespace, colour choice and contrast. 
 - **React** - Provides registration, login, daily posting, feed display, and real-time post reactions. A separate admin route allows only admins to reset other users’ passwords.  
 - **Service** - Backend service with endpoints for:
-  - **/api/registration** (user registration)    
+  - **/api/register** (user registration)    
   - **/api/login** (user authentication)  
   - **/api/gratitude** (submitting and retrieving gratitude posts)  
   - **/api/heart** (real-time reactions)  
