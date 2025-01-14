@@ -33,6 +33,12 @@ sequenceDiagram
     participant B as Browser (React)
     participant S as Server
     participant DB as Database
+
+    alt Login Successful
+        S->>B: Return Auth Token
+    else Login Failed
+        S->>B: Return Error 
+    end
 ```
 
 This next diagram depicts the core flows of a normal user who will post and interact with the community posts. 
