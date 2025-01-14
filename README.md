@@ -1,4 +1,4 @@
-# Scatter Sunshine: A Daily Positivity Community
+# Scatter Sunshine: A Community for Daily Positivity
 
 [My Notes](notes.md)
 
@@ -23,7 +23,7 @@ Scatter Sunshine is an innovative twist on daily positivity, blending spiritual 
 
 The following image includes design sketches for the Login/Register, Daily Positivity post, and Positivity Feed.
 
-![Design image FULL SIZE](gratitudeMockUI.jpg)
+![Design image FULL SIZE](positivityMockUI.jpg)
 
 
 ### Key features
