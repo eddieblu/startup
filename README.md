@@ -41,7 +41,7 @@ I am going to use the required technologies in the following ways.
 - **CSS** - Complementary colour scheme and responsive design for different screen sizes.
 - **JavaScript** – Handles user interactions (clicking “heart," posting positivity). Updates the UI in real-time through state changes.
 - **React** - Single page application with routing between views and reactive user controls. 
-- **Web Services** - Backend service with endpoints for authentication, submitting and retrieving posts, real-time reactions. Third party call to get Zen quotes.
+- **Web Services** - Backend service with endpoints for authentication, submitting and retrieving posts, and real-time reactions. Third party call to get Zen quotes.
 - **Authentication** – Register and login users. Users must be authenticated to post, view posts or react.
 - **Database** - Stores authentication, positivity posts, and heart-react data. Automatically removes posts at midnight MST. 
 - **WebSocket** - Broadcasts new posts and heart-reacts.
