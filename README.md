@@ -34,6 +34,12 @@ sequenceDiagram
     participant S as Server
     participant DB as Database
 
+    U->>B: Request Register Page
+    B->>S: GET /
+    S->>B: Return HTML/CSS/JS
+
+    U->>B: 
+
     alt Login Successful
         S->>B: Return Auth Token
     else Login Failed
@@ -50,8 +56,8 @@ sequenceDiagram
     participant S as Server
     participant DB as Database
 
-    U->>B: Request Landing Page
-    B->>S: GET /
+    U->>B: Request Gratitude Feed Page
+    B->>S: GET /feed
     S->>B: Return HTML/CSS/JS
 
     U->>B: Enter Daily Gratitude (<150 chars)
