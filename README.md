@@ -39,15 +39,15 @@ The following is space for potential sequence diagrams to explain the core flows
 I am going to use the required technologies in the following ways.
 
 - **HTML** - Uses correct HTML structure for the application. Two HTML pages (a login page and a gratitude feed page).
-- **CSS** - Establishes consistent styling across different screen sizes. Uses good whitespace, colour choice, and contrast.  
-- **React** - Provides registration, login, daily posting, showing the feed, and reacting to others’ posts in real-time. A separate admin route allows only admins to reset other users’ passwords.  
+- **CSS** - Application styling that looks good on different screen sizes. Uses good whitespace, colour choice and contrast. 
+- **React** - Provides registration, login, daily posting, feed display, and real-time post reactions. A separate admin route allows only admins to reset other users’ passwords.  
 - **Service** - Backend service with endpoints for:
   - **/api/registration** (user registration)    
   - **/api/login** (user authentication)  
   - **/api/gratitude** (submitting and retrieving gratitude posts)  
   - **/api/heart** (real-time reactions)  
   - **/api/admin/reset** (admin-only password reset)  
-- **DB/Login** - Stores user credentials, daily gratitude posts, and heart-react data. Includes secure password hashing. Users must be authenticated to post or react. Automatically removes posts older than one day 
+- **DB/Login** - Stores users, gratitude posts, and heart-react data in database. Register and login users. Credentials securely stored in database (password hashing). Users must be authenticated to post, view posts or react. Posts older than one day are automatically removed. 
 - **WebSocket** - Broadcasts new posts and heart-reacts instantly to all connected clients for real-time feed updates.
 
 
