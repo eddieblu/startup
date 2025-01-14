@@ -17,7 +17,7 @@ For this deliverable, I did the following. I checked the box `[x]` and added a d
 
 ### Elevator pitch
 
-Scatter Sunshine is an innovative twist on daily positivity, blending spiritual well-being into an optimistic social network. One post each day unlocks a feed of cheerful entries, sparking real-time encouragement through heart-reacts and streak-driven consistency. Whether you’re looking to cultivate an empowering routine or find uplifting support from a like-minded community, Scatter Sunshine is here to guide you toward a brighter life—one day at a time.
+Scatter Sunshine is an innovative twist on daily positivity, blending spiritual well-being into an optimistic social network. One post each day unlocks a feed of cheerful entries, sparking real-time encouragement through heart-reacts and streak-driven consistency. Whether you’re looking to cultivate an empowering routine of looking on the bright side or find uplifting support from a like-minded community, Scatter Sunshine is here to guide you toward a brighter life—one day at a time.
 
 
 ### Design
