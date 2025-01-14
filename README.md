@@ -25,61 +25,7 @@ Sunshine Gratitude is an innovative twist on daily gratitude, blending spiritual
 
 ![Design image](placeholder.png)
 
-The following are two separate sequence diagrams to explain the core flows. This first diagram depicts the registration and login process as well as what results from a bad log in and an admin log in. 
-
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant B as Browser (React)
-    participant S as Server
-    participant DB as Database
-
-    U->>B: Request Register Page
-    B->>S: GET /
-    S->>B: Return HTML/CSS/JS
-
-    U->>B: 
-
-    alt Login Successful
-        S->>B: Return Auth Token
-    else Login Failed
-        S->>B: Return Error 
-    end
-```
-
-This next diagram depicts the core flows of a normal user who will post and interact with the community posts. 
-
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant B as Browser (React)
-    participant S as Server
-    participant DB as Database
-
-    U->>B: Request Gratitude Feed Page
-    B->>S: GET /feed
-    S->>B: Return HTML/CSS/JS
-
-    U->>B: Enter Daily Gratitude (<150 chars)
-    B->>S: POST /api/gratitude
-    S->>DB: Store New Post
-    DB->>S: Acknowledgment
-    S->>B: Return Success (Post Visible)
-
-    B->>S: Subscribe to Feed (WebSocket)
-    S->>B: Broadcast Real-Time Feed
-
-    U->>B: Click "Heart" on a Post
-    B->>S: (WebSocket) Send "heart" action
-    S->>B: Broadcast Updated Heart Count
-
-    U->>B: Choose to "Save" Post to Archive
-    B->>S: POST /api/archive
-    S->>DB: Update Post to Mark as Saved
-    DB->>S: Acknowledgment
-    S->>B: Return Success (Post Saved)
-```
-
+The following is space for potential sequence diagrams to explain the core flows. 
 
 ### Key features
 
