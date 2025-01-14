@@ -95,12 +95,18 @@ sequenceDiagram
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Uses correct HTML structure for the application. Two HTML pages (a login page and a gratitude feed page).
+- **CSS** - Establishes consistent styling across different screen sizes. Uses good whitespace, colour choice, and contrast.  
+- **React** - Provides registration, login, daily gratitude posting (<150 chars), and showing others’ posts in real-time. A separate admin page or route allows only admins to reset other users’ passwords.  
+- **Service** - Backend service with endpoints for:
+  - **/api/registration** (user registration)    
+  - **/api/login** (user authentication)  
+  - **/api/gratitude** (submitting and retrieving gratitude posts)  
+  - **/api/heart** (real-time reactions)  
+  - **/api/admin/reset** (admin-only password reset)  
+- **DB/Login** - Stores user credentials, daily gratitude posts, and heart-react data. Includes secure password hashing. Users must be authenticated to post or react. Only admins can perform password resets. 
+- **WebSocket** - Broadcasts new posts and heart-reacts instantly to all connected clients for real-time feed updates.
+
 
 ## 🚀 AWS deliverable
 
