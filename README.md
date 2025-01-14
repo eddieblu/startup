@@ -25,7 +25,17 @@ Sunshine Gratitude is an innovative twist on daily gratitude, blending spiritual
 
 ![Design image](placeholder.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+The following are two separate sequence diagrams to explain the core flows. This first diagram depicts the registration and login process as well as what results from a bad log in and an admin log in. 
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant B as Browser (React)
+    participant S as Server
+    participant DB as Database
+```
+
+This next diagram depicts the core flows of a normal user who will post and interact with the community posts. 
 
 ```mermaid
 sequenceDiagram
