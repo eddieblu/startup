@@ -6,6 +6,7 @@
 
 
 ## 🚀 Specification Deliverable
+
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] Proper use of Markdown
@@ -20,8 +21,7 @@ Sunshine Gratitude is an innovative twist on daily gratitude, blending spiritual
 
 ### Design
 
-(gratitudeMockUI.jpg)
-![Design image][<img src="gratitudeMockUI.jpg" alt="Alt text" width="200px" />](gratitudeMockUI.jpg)
+![<img src="gratitudeMockUI.jpg" alt="Alt text" width="200px" />](gratitudeMockUI.jpg)
 
 
 The following is space for potential sequence diagrams to explain the core flows. 
