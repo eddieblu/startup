@@ -21,6 +21,8 @@ Sunshine Gratitude is an innovative twist on daily gratitude, blending spiritual
 
 ### Design
 
+The following image includes design sketches for the Login, Register, Daily Gratitude post, Gratitude Feed, and Admin Dashboard flows.
+
 ![Design image FULL SIZE](gratitudeMockUI.jpg)
 
 
