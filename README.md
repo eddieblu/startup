@@ -41,9 +41,10 @@ The following image includes design sketches for the Login, Register, Daily Grat
 I am going to use the required technologies in the following ways.
 
 - **HTML** - Uses correct HTML structure for the application. Two HTML pages (a login page and a gratitude feed page). 
-- **CSS** - Application styling that looks good on different screen sizes. Uses good whitespace, colour choice and contrast. 
+- **CSS** - Application styling that looks good on different screen sizes. Uses good whitespace, colour choice and contrast.
+- **JavaScript** - Reactivity (e.g. What happens when a user presses a button)
 - **React** - Provides registration, login, daily posting, feed display, and real-time post reactions. A separate admin route allows only admins to reset other users’ passwords.  
-- **Service** - Backend service with endpoints for:
+- **Web Service** - Backend service with endpoints for:
   - **/api/register** (user registration)    
   - **/api/login** (user authentication)  
   - **/api/gratitude** (submitting and retrieving gratitude posts)  
@@ -51,6 +52,32 @@ I am going to use the required technologies in the following ways.
   - **/api/admin/reset** (admin-only password reset)  
 - **DB/Login** - Stores users, gratitude posts, and heart-react data in database. Register and login users. Credentials securely stored in database (password hashing). Users must be authenticated to post, view posts or react. Posts older than one day are automatically removed. 
 - **WebSocket** - Broadcasts new posts and heart-reacts instantly to all connected clients for real-time feed updates.
+
+- **HTML** – Uses correct HTML structure before porting fully to React. Two HTML pages (login and gratitude feed) with correct semantic markup (<header>, <main>, <footer>, etc.).
+- **CSS** – Applies a design theme suitable for multiple screen sizes. Uses good whitespace, color choice and contrast.
+- **JavaScript** – Handles user interactions (clicking “heart," submitting a gratitude post). Updates the UI in real-time through state changes and provides instant feedback.
+- **React** –  Provides registration, login, daily posting, feed display, and real-time post reactions. A separate admin route allows only admins to reset other users’ passwords.
+- **Web service** – Backend service with endpoints for:
+  - **/api/register** (user registration)    
+  - **/api/login** (user authentication)  
+  - **/api/gratitude** (submitting and retrieving gratitude posts)  
+  - **/api/heart** (real-time reactions)  
+  - **/api/admin/reset** (admin-only password reset)  
+  - External Service: Will call a public “inspirational quotes” API (from GitHub’s public-apis list) to display a daily motivational quote alongside user posts.
+- **Authentication / External Service** – Users create accounts with email/password. After logging in, their username and streak progress appear on-screen, and they can post or view the feed.
+
+Database data – A rendering of application data that is stored in the database
+Stores users (with hashed passwords), gratitude posts, and heart-react counts. Automatically removes posts older than one day to refresh the feed each morning.
+
+WebSocket data – A rendering of data that is received from your server
+Broadcasts new posts and heart-reacts instantly to all connected clients, so everyone sees updates in real time without needing to refresh the page.
+
+
+
+
+
+
+
 
 
 ## 🚀 AWS deliverable
