@@ -83,12 +83,12 @@ sequenceDiagram
 
 ### Key features
 
-- **Secure login over HTTPS** - Users must register and sign in (HTTPS) for protected access 
-- **Daily posting** - Once a day, post your gratitude in 150 characters or fewer to unlock the community feed. 
-- **Community feed of posts** - See uplifting entries from everyone who posted that day.
-- **Real-time heart reactions** - Users can “heart” others’ entries, which updates live for everyone.
-- **Streak tracking** - A sun icon shows how many consecutive days you’ve posted. Each new day of posting increases your sun streak count. 
-- **Optional gratitude collection** - Save your post to a personal archive or let it expire at day’s end
+- Secure login over HTTPS
+- Daily 150-character gratitude posts
+- Real-time feed with heart reactions
+- Sun icon for streak tracking
+- Automatic expiry of daily entries
+- Admin dashboard for password resets
 
   
 ### Technologies
