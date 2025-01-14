@@ -13,8 +13,8 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
-- [ ] Description of key features
-- [ ] Description of how you will use each technology
+- [x] Description of key features
+- [x] Description of how you will use each technology
 - [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
@@ -43,14 +43,14 @@ I am going to use the required technologies in the following ways.
 
 - **HTML** - Uses correct HTML structure for the application. Two HTML pages (a login page and a gratitude feed page).
 - **CSS** - Establishes consistent styling across different screen sizes. Uses good whitespace, colour choice, and contrast.  
-- **React** - Provides registration, login, daily gratitude posting (<150 chars), and showing others’ posts in real-time. A separate admin page or route allows only admins to reset other users’ passwords.  
+- **React** - Provides registration, login, daily posting, showing the feed, and reacting to others’ posts in real-time. A separate admin route allows only admins to reset other users’ passwords.  
 - **Service** - Backend service with endpoints for:
   - **/api/registration** (user registration)    
   - **/api/login** (user authentication)  
   - **/api/gratitude** (submitting and retrieving gratitude posts)  
   - **/api/heart** (real-time reactions)  
   - **/api/admin/reset** (admin-only password reset)  
-- **DB/Login** - Stores user credentials, daily gratitude posts, and heart-react data. Includes secure password hashing. Users must be authenticated to post or react. Only admins can perform password resets. 
+- **DB/Login** - Stores user credentials, daily gratitude posts, and heart-react data. Includes secure password hashing. Users must be authenticated to post or react. Automatically removes posts older than one day 
 - **WebSocket** - Broadcasts new posts and heart-reacts instantly to all connected clients for real-time feed updates.
 
 
