@@ -35,34 +35,28 @@ sequenceDiagram
     participant DB as Database
 
     U->>B: Request Landing Page
-    B->>S: GET / (Landing Page Resources)
+    B->>S: GET /
     S->>B: Return HTML/CSS/JS
 
-    U->>B: Enter Credentials (Login)
-    B->>S: POST /api/login
-    S->>DB: Validate Credentials
-    DB->>S: Return Auth Result
+    U->>B: Enter Daily Gratitude (<150 chars)
+    B->>S: POST /api/gratitude
+    S->>DB: Store New Post
+    DB->>S: Acknowledgment
+    S->>B: Return Success (Post Visible)
 
-    alt Login Success
-        S->>B: Return Auth Token
-        B->>U: Show Main Page (Gratitude Prompt)
+    Note over B,S: WebSocket Connection Established
+    B->>S: Subscribe to Feed (WebSocket)
+    S->>B: Broadcast Real-Time Feed
 
-        U->>B: Enter Daily Gratitude (<150 chars)
-        B->>S: POST /api/gratitude
-        S->>DB: Store Gratitude Entry
-        DB->>S: Acknowledgment
-        S->>B: Return Success
+    U->>B: Click "Heart" on a Post
+    B->>S: (WebSocket) Send "heart" action
+    S->>B: Broadcast Updated Heart Count
 
-        B->>S: (WebSocket) Subscribe to Feed
-        S->>B: Broadcast Real-Time Feed Data
-        
-        U->>B: Click "Heart" on a Post
-        B->>S: (WebSocket) Send "heart" action
-        S->>B: Broadcast Updated Heart Count
-    else Login Fail
-        S->>B: Return Error
-        B->>U: Show Login Error
-    end
+    U->>B: Choose to "Save" Post to Archive
+    B->>S: POST /api/archive
+    S->>DB: Update Post to Mark as Saved
+    DB->>S: Acknowledgment
+    S->>B: Return Success (Post Saved)
 ```
 
 
