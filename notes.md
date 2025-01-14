@@ -8,7 +8,7 @@
 
 
 ## Unresolved Questions
-Do I need to include a <nark>Deployment Instructions section?</mark>
+1. Do I need to include a <mark>Deployment Instructions section?</mark>
 
 ## Helpful links
 
