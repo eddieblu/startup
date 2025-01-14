@@ -1,4 +1,4 @@
-# Scatter Sunshine: The Daily Gratitude Community
+# Scatter Sunshine: A Daily Gratitude Community
 
 [My Notes](notes.md)
 
