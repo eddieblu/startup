@@ -9,7 +9,7 @@
 
 ## To Be Resolved
 1. Do I need to include a <mark>Deployment Instructions section?</mark>
-2. Change photo in README to this: [<img src="gratitudeMockUI.jpg" alt="Alt text" width="200px" />](gratitudeMockUI.jp  g)
+2. Change photo in README to this: [<img src="gratitudeMockUI.jpg" alt="Alt text" width="200px" />]
 
 
 ## Helpful links
