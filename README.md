@@ -44,7 +44,6 @@ sequenceDiagram
     DB->>S: Acknowledgment
     S->>B: Return Success (Post Visible)
 
-    Note over B,S: WebSocket Connection Established
     B->>S: Subscribe to Feed (WebSocket)
     S->>B: Broadcast Real-Time Feed
 
@@ -60,10 +59,6 @@ sequenceDiagram
 ```
 
 
-
-
-
-
 ### Key features
 
 - **Secure login over HTTPS** - Users must register and sign in (HTTPS) for protected access 
@@ -72,8 +67,8 @@ sequenceDiagram
 - **Real-time Heart Reactions** - Users can “heart” others’ entries, which updates live for everyone.
 - **Streak Tracking** - A sun icon shows how many consecutive days you’ve posted. Each new day of posting increases your sun streak count. 
 - **Optional Gratitude Collection** - Save your post to a personal archive or let it expire at day’s end
-- **Profile Management** - A dedicated account page lets you update personal info (username/password) and view your saved posts
 
+  
 ### Technologies
 
 I am going to use the required technologies in the following ways.
