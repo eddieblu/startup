@@ -19,44 +19,37 @@ For this deliverable, I did the following. I checked the box `[x]` and added a d
 
 Scatter Sunshine is an innovative twist on daily positivity, blending spiritual well-being into an optimistic social network. One post each day unlocks a feed of cheerful entries, sparking real-time encouragement through heart-reacts and streak-driven consistency. Whether you’re looking to cultivate an empowering routine or find uplifting support from a like-minded community, Scatter Sunshine is here to guide you toward a brighter life—one day at a time.
 
+
 ### Design
-
-The following image includes design sketches for the Login/Register, Daily Positivity post, and Positivity Feed.
-
 ![Design image FULL SIZE](positivityMockUI.jpg)
 
 
 ### Key features
 
-- Secure login over HTTPS (via Auth0)
+- Secure login over HTTPS
 - Daily 150-character positivity posts
 - Real-time feed with heart reactions
 - Sun icon for streak tracking
 - Automatic expiry of daily entries
+
   
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** – Uses correct HTML structure before porting fully to React. Two HTML pages (landing page and positivity feed page). 
-- **CSS** – Applies a design theme suitable for multiple screen sizes. Uses good whitespace, colour choice and contrast.
+- **HTML** - Three different views: login/register controls, positivity posting, and positivity feed.
+- **CSS** - Complementary colour scheme and responsive design for different screen sizes.
 - **JavaScript** – Handles user interactions (clicking “heart," posting positivity). Updates the UI in real-time through state changes.
-- **React** –  Manages daily posting, feed display, and real-time reactions.
-- **Web Service** – Backend service with endpoints for:
-  - **/api/positivity** (submitting and retrieving positivity posts)  
-  - **/api/heart** (tracking heart reactions in real-time)  
-- **Authentication / External Web Service** – Uses the **Auth0** public API for all login and registration needs.
-- **Database** – Stores user details (minus passwords), positivity posts, and heart-react data. Automatically removes posts at midnight MST.
-- **WebSocket** – Broadcasts new posts and heart-reacts instantly to all connected clients, so everyone sees updates in real-time.
-
-
-
-
-
+- **React** - Single page application with routing between views and reactive user controls. 
+- **Web Services** - Backend service with endpoints for authentication, submitting and retrieving posts, real-time reactions. Third party call to get Zen quotes.
+- **Authentication** – Register and login users. Users must be authenticated to post, view posts or react.
+- **Database** - Stores authentication, positivity posts, and heart-react data. Automatically removes posts at midnight MST. 
+- **WebSocket** - Broadcasts new posts and heart-reacts.
+  
 
 ## 🚀 AWS deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+For this deliverable, I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [ ] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
 
