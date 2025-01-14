@@ -33,7 +33,6 @@ The following image includes design sketches for the Login, Register, Daily Grat
 - Real-time feed with heart reactions
 - Sun icon for streak tracking
 - Automatic expiry of daily entries
-- Auth0-managed password resets
   
 ### Technologies
 
