@@ -2,7 +2,7 @@
 
 [My Notes](notes.md)
 
-**Sunshine Gratitude** is a daily reflection platform inspired by the beloved hymn “There Is Sunshine in My Soul Today,” encouraging short (up to 150 characters), uplifting gratitude posts in a warm, faith-centered atmosphere. Each new post unlocks a real-time community feed with instant heart reactions, while a sun icon tracks your streak. Entries automatically expire at day’s end for a fresh start every morning, and an admin-only dashboard ensures simple, secure user management.
+**Sunshine Gratitude** is a daily reflection platform inspired by the beloved hymn “There Is Sunshine in My Soul Today,” encouraging short, uplifting gratitude posts in a warm, faith-centered atmosphere. Each new post unlocks a real-time community feed with instant heart reactions, while a sun icon tracks your streak. Entries automatically expire at day’s end for a fresh start every morning, and an admin-only dashboard ensures simple, secure user management.
 
 
 ## 🚀 Specification Deliverable
