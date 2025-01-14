@@ -1,4 +1,4 @@
-# Scatter Sunshine
+# Scatter Sunshine: The Daily Gratitude Community
 
 [My Notes](notes.md)
 
@@ -17,7 +17,7 @@ For this deliverable, I did the following. I checked the box `[x]` and added a d
 
 ### Elevator pitch
 
-Scatter Sunshine is an innovative twist on daily gratitude, blending spiritual well-being into a faith-based social network. One post each day unlocks a feed of uplifting entries, sparking real-time encouragement through heart-reacts and streak-driven consistency. Whether you’re looking to cultivate a deeper spiritual routine or find uplifting support from a like-minded community, Sunshine Gratitude is here to guide you toward a brighter, more meaningful life—one day at a time.
+Scatter Sunshine is an innovative twist on daily gratitude, blending spiritual well-being into a faith-based social network. One post each day unlocks a feed of uplifting entries, sparking real-time encouragement through heart-reacts and streak-driven consistency. Whether you’re looking to cultivate a meaningful spiritual routine or find uplifting support from a like-minded community, Scatter Sunshine is here to guide you toward a brighter, more meaningful life—one day at a time.
 
 ### Design
 
