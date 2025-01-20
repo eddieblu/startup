@@ -12,13 +12,19 @@
 
 ## Working in CMD Notes
 How to shell into a production environment server:
-- Use the ssh console program to shell into your production environment server.
+1. Use the ssh console program to shell into your production environment server.
   ```
-  ➜  ssh -i [key pair file] ubuntu@[yourdomainnamehere]
+  ➜  ssh -i [key pair file] ubuntu@edwardscs.click
   ```
-for example,
-➜  ssh -i ~/keys/production.pem ubuntu@myfunkychickens.click
 
+How to open the Caddy file
+```
+➜  cd ~
+➜  vi Caddyfile
+```
+
+How to save the Caddy file
+1. Press Esc, then type :wq to save and exit.
 
 
 
