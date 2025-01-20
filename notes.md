@@ -9,7 +9,16 @@
 
 ## To Be Resolved
 1. Do I need to include a <mark>Deployment Instructions section?</mark>
-2. Change photo in README to this: [<img src="gratitudeMockUI.jpg" alt="Alt text" width="200px" />]
+
+## Working in CMD Notes
+How to shell into a production environment server:
+- Use the ssh console program to shell into your production environment server.
+➜  ssh -i [key pair file] ubuntu@[yourdomainnamehere]
+for example,
+➜  ssh -i ~/keys/production.pem ubuntu@myfunkychickens.click
+
+
+
 
 ## Public API Notes
 How It Works
