@@ -11,19 +11,19 @@
 1. Do I need to include a <mark>Deployment Instructions section?</mark>
 
 ## Working in CMD Notes
-# How to shell into a production environment server:
+**How to shell into a production environment server:**
 1. Use the ssh console program to shell into your production environment server.
   ```
   ➜  ssh -i [key pair file] ubuntu@edwardscs.click
   ```
 
-# How to open the Caddy file
+**How to open the Caddy file**
 ```
 ➜  cd ~
 ➜  vi Caddyfile
 ```
 
-# How to save the Caddy file
+**How to save the Caddy file**
 1. Press Esc, then type :wq to save and exit.
 
 
