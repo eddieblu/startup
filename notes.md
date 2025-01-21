@@ -59,7 +59,7 @@ You can also decide if you want to require email verification before the user ca
 - [Course instruction](https://github.com/webprogramming260)
 - [Canvas](https://byu.instructure.com)
 - [MDN](https://developer.mozilla.org)
-- [W3Schools](https://www.w3schools.com/tags/)
+- [W3 Schools HTML Element Tags Reference](https://www.w3schools.com/tags/)
 
 ## AWS Notes
 
