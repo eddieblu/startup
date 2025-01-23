@@ -75,7 +75,7 @@ The command ./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup is execu
 
 **Live Server**
 
-* Auto reload does not work without </head/> and /<body/>
+* Auto reload does not work without < head > and < body >
 
 
 
