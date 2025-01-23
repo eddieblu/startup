@@ -38,7 +38,7 @@ vi Caddyfile
 
 
 ## Deploy Files
-Template
+Template command to deploy -- RUN FROM GIT BASH
 ```
 ./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup
 ```
