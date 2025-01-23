@@ -32,20 +32,20 @@ Template
 **What does this command do?**
 The command ./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup is executing a shell script named deployFiles.sh with three command-line options (-k, -h, and -s) and their respective arguments. Here's what each part likely represents:
 
-1. ./deployFiles.sh:
+./deployFiles.sh:
   * This runs the script named deployFiles.sh located in the current directory (./).
   * The script is likely responsible for deploying files to a server or environment.
-2. -k <yourpemkey>:
 
-The -k option is likely used to specify the path to a private key file (e.g., a .pem file), which is commonly used for authentication when connecting to a remote server via SSH.
-<yourpemkey> should be replaced with the path to the private key file.
+-k <yourpemkey>:
+ * The -k option is likely used to specify the path to a private key file (e.g., a .pem file), which is commonly used for authentication when connecting to a remote server via SSH.
+ * <yourpemkey> should be replaced with the path to the private key file.
+
 -h <yourdomain>:
+ * The -h option is likely used to specify the hostname or domain name of the remote server where the deployment is happening.
+ * <yourdomain> should be replaced with the actual domain name or IP address of the server.
 
-The -h option is likely used to specify the hostname or domain name of the remote server where the deployment is happening.
-<yourdomain> should be replaced with the actual domain name or IP address of the server.
 -s startup:
-
-The -s option might specify a mode, operation, or configuration related to the script. In this case, startup is likely a specific mode or set of instructions (e.g., running startup-related commands or preparing the server environment for deployment).
+ * The -s option might specify a mode, operation, or configuration related to the script. In this case, startup is likely a specific mode or set of instructions (e.g., running startup-related commands or preparing the server environment for deployment).
 
 
 ## Public API Notes
