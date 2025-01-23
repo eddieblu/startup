@@ -12,9 +12,11 @@
 - [Canvas](https://byu.instructure.com)
 - [MDN](https://developer.mozilla.org)
 - [W3 Schools - HTML Element Tags Reference](https://www.w3schools.com/tags/)
+- [Change VS Code Workspace Themes](https://medium.com/@juris.savos/setting-a-per-project-colour-scheme-in-vscode-89cc5836b1de)
 
 
 ## Working in the Production Environment Server
+
 **How to shell into server:**
 1. Use the ssh console program to shell into your production environment server.
 
@@ -31,6 +33,9 @@ vi Caddyfile
 
 **How to save the Caddy file**
 1. Press Esc, then type :wq to save and exit.
+
+
+
 
 ## Deploy Files
 Template
@@ -56,6 +61,10 @@ The command ./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup is execu
 
 -s startup:
  * The -s option might specify a mode, operation, or configuration related to the script. In this case, startup is likely a specific mode or set of instructions (e.g., running startup-related commands or preparing the server environment for deployment).
+
+
+
+
 
 ## AWS Notes
 
