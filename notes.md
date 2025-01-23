@@ -30,7 +30,7 @@ Template
 ./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup
 ```
 **What does this command do?**
-The command ./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup is executing a shell script named deployFiles.sh with three command-line options (-k, -h, and -s) and their respective arguments. Here's what each part likely represents:
+/n The command ./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup is executing a shell script named deployFiles.sh with three command-line options (-k, -h, and -s) and their respective arguments. Here's what each part likely represents:
 
 ./deployFiles.sh:
   * This runs the script named deployFiles.sh located in the current directory (./).
