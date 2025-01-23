@@ -19,7 +19,7 @@
 1. Use the ssh console program to shell into your production environment server.
 
 ```
-ssh -i C:\Users\betha\byu\keys\cs260_keypair.pem ubuntu@edwardscs.click
+ssh -i <yourpemkey> ubuntu@edwardscs.click
 ```
 
 **How to open the Caddy file**
