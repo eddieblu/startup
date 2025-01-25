@@ -7,6 +7,7 @@
 
 ## To Be Resolved
 1. Do I need to include a <mark>Deployment Instructions section?</mark>
+2. How can I configure the startup link from my root [Web Programming 260](https://edwardscs.click/) page to lead to my own [startup](https://startup.edwardscs.click/)?
 
 
 
