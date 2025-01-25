@@ -58,7 +58,7 @@ For this deliverable, I did the following. I checked the box `[x]` and added a d
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] **HTML pages** - Three different pages. One for each view. `index.html` (Login/Register), `post.html`, and `feed.html`.
-- [ ] **Proper HTML element usage** - I researched for relevant elements that I could use. I used header, footer, main, nav, a, input, button, form, textarea, i, and img.
+- [x] **Proper HTML element usage** - I researched for relevant elements that I could use. I used header, footer, main, nav, a, input, button, form, textarea, i, and img.
 - [x] **Links** - Link in header called "Home" leads to login/register page. The login page automatically links to the post page and the post page automatically links to the feed page. 
 - [x] **Text** - Each view has text instructions about the page. 
 - [x] **3rd party API placeholder** - Login/Register page has a place to display a ZEN quote.
