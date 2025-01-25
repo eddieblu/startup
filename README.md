@@ -60,7 +60,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **HTML pages** - Three different pages. One for each view. `index.html` (Login/Register), `post.html`, and `feed.html`.
 - [x] **Proper HTML element usage** - I researched for relevant elements that I could use. I used header, footer, main, nav, a, input, button, form, textarea, i, and img.
 - [x] **Links** - Link in header called "Home" leads to login/register page. The login page automatically links to the post page and the post page automatically links to the feed page. 
-- [x] **Text** - Each view has text instructions about the page. 
+- [x] **Text** - Each view has text instructions about the page. User name is displayed on post and feed page. 
 - [x] **3rd party API placeholder** - Login/Register page has a place to display a ZEN quote.
 - [x] **Images** - Image is displayed on the Login page.
 - [x] **Login placeholder** - Placeholder for auth on the login page.
