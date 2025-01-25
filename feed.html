@@ -1,35 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>
-            Feed
-        </title>
-    </head>
-    <body>
-        <header>
-            <h1>Scatter Sunshine</h1>
-            <nav>
-                <menu>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="post.html">Post</a></li>
-                    <li><a href="feed.html">Feed</a></li>
-                  </menu>
-            </nav>
-            <hr /> <!--formatting that can be removed once there is css-->
-        </header>
 
-        <main>
-            <p>
-                This page is for posting your positivity to the community feed. 
-            </p>
-        </main>
+<head>
+    <title>
+        Feed
+    </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
 
-        <footer>
-            <hr /> <!--formatting that can be removed once there is css-->
-            <span class="text-reset">Bethany Edwards</span>
-            <br />
-            <a href="https://github.com/eddieblu/startup">GitHub</a>
-          </footer>
-        
-    </body>
+<body>
+    <header>
+        <h1>Scatter Sunshine</h1>
+        <nav>
+            <menu>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="post.html">Post</a></li>
+                <li><a href="feed.html">Feed</a></li>
+            </menu>
+        </nav>
+        <hr /> <!--formatting that can be removed once there is css-->
+    </header>
+
+    <main>
+        <h1>Feed</h1>
+        <div id="streak-counter">
+            <i class="fas fa-sun" style="color: rgb(255, 208, 0);"></i>
+            <span id="streak-count">4</span> day streak
+        </div>
+
+        <br /> <!-- hard coded whitespace -->
+
+        <!-- PLACEHOLDER Logged in user's post -->
+        <div class="post">
+            <div class="post-header">
+                <span class="username">@myusername</span>
+            </div>
+            <div class="post-content">
+                So grateful for my morning run and the blue skies!
+            </div>
+            <div class="post-footer">
+                <button class="heart-button">
+                    <i class="fa-solid fa-heart" style="color: red;"></i>
+                </button>
+                <span class="heart-count">3</span>
+            </div>
+        </div>
+
+        <br /> <!-- hard coded whitespace -->
+
+        <!-- PLACEHOLDER Posts from the community -->
+        <div class="feed">
+            <div class="post">
+                <div class="post-header">
+                    <span class="username">@username1</span>
+                </div>
+                <div class="post-content">
+                    A stranger complimented my outfit :)
+                </div>
+                <div class="post-footer">
+                    <button class="heart-button">
+                        <i class="fa-solid fa-heart" style="color: red;"></i>
+                    </button>
+                    <span class="heart-count">3</span>
+                </div>
+            </div>
+
+            <br /> <!-- hard coded whitespace -->
+
+
+            <div class="post">
+                <div class="post-header">
+                    <span class="username">@username2</span>
+                </div>
+                <div class="post-content">
+                    Got an A on my Stats Exam (phew)
+                </div>
+                <div class="post-footer">
+                    <button class="heart-button">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                    <span class="heart-count">2</span>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+
+    <footer>
+        <hr /> <!--formatting that can be removed once there is css-->
+        <span class="text-reset">Bethany Edwards</span>
+        <br />
+        <a href="https://github.com/eddieblu/startup">GitHub</a>
+    </footer>
+
+</body>
+
 </html>
