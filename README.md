@@ -59,13 +59,13 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [x] **HTML pages** - Three different pages. One for each view. `index.html` (Login/Register), `post.html`, and `feed.html`.
 - [ ] **Proper HTML element usage** - I researched for relevant elements that I could use. I used header, footer, main, nav, a, input, button, form, textarea, i, (img, fieldset, and many more.)
-- [x] **Links** - Link to login/register page found in header. The login page automatically links to the post page and the post page automatically links to the feed page. 
+- [x] **Links** - Link in header called "Home" leads to login/register page. The login page automatically links to the post page and the post page automatically links to the feed page. 
 - [x] **Text** - Each view has text instructions about the page. 
-- [x] **3rd party API placeholder** - Home (Login/Register) page has a place to display a ZEN quote.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **3rd party API placeholder** - Login/Register page has a place to display a ZEN quote.
+- [x] **Images** - Image is displayed on the Login page.
+- [x] **Login placeholder** - Placeholder for auth on the login page.
+- [x] **DB data placeholder** - Gratitude posts displayed on feed page showing content stored in database.  
+- [x] **WebSocket placeholder** - The feed page has placeholders for posts and heart reacts that will update in real-time. 
 
 ## 🚀 CSS deliverable
 
