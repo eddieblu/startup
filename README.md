@@ -59,7 +59,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [x] **HTML pages** - Three different pages. One for each view. `index.html` (Login/Register), `post.html`, and `feed.html`.
 - [ ] **Proper HTML element usage** - I researched for relevant elements that I could use. I used header, footer, main, nav, a, input, button, form, textarea, i, (img, fieldset, and many more.)
-- [ ] **Links** - I did not complete this part of the deliverable.
+- [x] **Links** - Links between views found in header 
 - [ ] **Text** - I did not complete this part of the deliverable.
 - [x] **3rd party API placeholder** - Home (Login/Register) page has a place to display a ZEN quote.
 - [ ] **Images** - I did not complete this part of the deliverable.
