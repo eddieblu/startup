@@ -18,6 +18,7 @@
 - [MDN](https://developer.mozilla.org)
 - [W3 Schools - HTML Element Tags Reference](https://www.w3schools.com/tags/)
 - [Change VS Code Workspace Themes](https://medium.com/@juris.savos/setting-a-per-project-colour-scheme-in-vscode-89cc5836b1de)
+- [Font Awesome Icons](https://fontawesome.com/icons/)
 
 
 
