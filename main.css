@@ -49,17 +49,6 @@ footer a {
   float: right;
 }
 
-#zen-quote {
-  padding-top: 1rem;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-
-
 @media (max-height: 600px) {
   header {
     display: none;
@@ -73,4 +62,16 @@ img {
     flex: 1 100vh;
     padding: 10vh;
   }
+}
+
+
+/* specific css */
+
+#zen-quote {
+  padding-top: 1rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
