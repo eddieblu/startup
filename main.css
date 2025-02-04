@@ -7,7 +7,7 @@ body {
 }
 
 header {
-  /* flex: 0 80px; */
+  flex: 0 80px;
   font-size: 20px;
   display: flex;
   justify-content: center;
@@ -15,13 +15,13 @@ header {
 }
 
 main {
+  flex: 1 calc(100vh - 110px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 10vh;
   padding-top: 5vh;
+  padding-bottom: 10vh;
   background-color: #f7eba8;
-  width: 100%;
 }
 
 footer {
@@ -29,13 +29,25 @@ footer {
   background-color: #EFBC47;
 }
 
+menu {
+  flex: 1;
+  display: flex;
+  /*  overwrite Bootstrap so the menu does not wrap */
+  flex-direction: row !important;
+  list-style: none;
+} 
+
+menu .nav-item {
+  padding: 0 0.3em;
+}
+
 footer a {
   float: right;
-  color: black;
+  /* color: black; */
 }
 
 header a {
-  color: black;
+  /* color: black; */
   text-decoration: none;
 }
 
