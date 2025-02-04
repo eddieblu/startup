@@ -29,6 +29,11 @@ footer {
   background-color: #EFBC47;
 }
 
+footer a {
+  float: right;
+  color: black;
+}
+
 header a {
   color: black;
   text-decoration: none;
