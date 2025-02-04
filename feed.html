@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="post.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Verdana&display=swap">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -28,56 +29,70 @@
             Scattered sunshine from you and the community. You just made someone's day brighter!
         </p>
 
-        <div class="feed-container">
+        <div class="container my-4">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
 
-            <!-- User's own post -->
-            <div class="post">
-                <div class="post-header">
-                    @<span class="username">myusername</span>
+                <!-- Example Post 1 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            @<span class="username">myusername</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                So grateful for my morning run and the blue skies!
+                            </p>
+                        </div>
+                        <div class="card-footer d-flex align-items-center">
+                            <button class="btn btn-link p-0 me-2" style="font-size: 1.2rem;">
+                                <i class="fas fa-heart text-danger"></i>
+                            </button>
+                            <span class="heart-count">3</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="post-content">
-                    So grateful for my morning run and the blue skies!
+
+                <!-- Example Post 2 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            @<span class="username">username1</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                A stranger complimented my outfit :)
+                            </p>
+                        </div>
+                        <div class="card-footer d-flex align-items-center">
+                            <button class="btn btn-link p-0 me-2" style="font-size: 1.2rem;">
+                                <i class="fas fa-heart text-danger"></i>
+                            </button>
+                            <span class="heart-count">3</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="post-footer">
-                    <button class="heart-button">
-                        <i class="fa-solid fa-heart" style="color: red;"></i>
-                    </button>
-                    <span class="heart-count">3</span>
+
+                <!-- Example Post 3 -->
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            @<span class="username">username2</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                Got an A on my Stats Exam (phew)
+                            </p>
+                        </div>
+                        <div class="card-footer d-flex align-items-center">
+                            <button class="btn btn-link p-0 me-2" style="font-size: 1.2rem;">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <span class="heart-count">2</span>
+                        </div>
+                    </div>
                 </div>
+
             </div>
-
-            <!-- Community posts -->
-            <div class="post">
-                <div class="post-header">
-                    @<span class="username">username1</span>
-                </div>
-                <div class="post-content">
-                    A stranger complimented my outfit :)
-                </div>
-                <div class="post-footer">
-                    <button class="heart-button">
-                        <i class="fa-solid fa-heart" style="color: red;"></i>
-                    </button>
-                    <span class="heart-count">3</span>
-                </div>
-            </div>
-
-            <div class="post">
-                <div class="post-header">
-                    @<span class="username">username2</span>
-                </div>
-                <div class="post-content">
-                    Got an A on my Stats Exam (phew)
-                </div>
-                <div class="post-footer">
-                    <button class="heart-button">
-                        <i class="fa-regular fa-heart"></i>
-                    </button>
-                    <span class="heart-count">2</span>
-                </div>
-            </div>
-
-        </div>
 
 
     </main>
