@@ -73,7 +73,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [x] **Header, footer, and main content body** - Each component is styled on all pages.
 - [x] **Navigation elements** - I dropped the underline and changed the colour for which page is active.
-- [ ] **Responsive to window resizing** - My app looks great on almost all window sizes and devices, but there is one size case that I cannot figure out.
+- [x] **Responsive to window resizing** - My app looks great on almost all window sizes and devices.
 - [x] **Application elements** - I used good contrast and whitespace.
 - [x] **Application text content** - I used consistent font and sizes.
 - [x] **Application images** - I styled an image on the Login/Register page. 
