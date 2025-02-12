@@ -92,8 +92,8 @@ Enable "Commit and Sync" in VS Code
 git.postCommitCommand
 ```
 4. Change the setting to sync:
-Default: none (Only commits)
-Change to: sync (Commits and syncs automatically)
+  - Default: none (Only commits)
+  - Change to: sync (Commits and syncs automatically)
 
 
 
