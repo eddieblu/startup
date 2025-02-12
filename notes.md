@@ -84,13 +84,14 @@ The command ./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup is execu
 
 In VS Code, you can combine the Commit and Sync actions into a single step by enabling the setting:
 
-1. Enable "Commit and Sync" in VS Code
-Open VS Code.
-Go to File > Preferences > Settings (or press Ctrl + ,).
-Search for:
-Copy
+Enable "Commit and Sync" in VS Code
+1. Open VS Code.
+2. Go to File > Preferences > Settings (or press Ctrl + ,).
+3. Search for: 
+```
 git.postCommitCommand
-Change the setting to sync:
+```
+4. Change the setting to sync:
 Default: none (Only commits)
 Change to: sync (Commits and syncs automatically)
 
