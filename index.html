@@ -1,75 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Scatter Sunshine CSS</title>
-    <link rel="icon" href="favicon.ico" />
-
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Verdana&display=swap">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-</head>
-
-<body>
-    <header class="container-fluid">
-        <nav class="navbar navbar-dark">
-            <a class="navbar-brand" href="/">
-                <h1>Scatter Sunshine</h1>
-            </a>
-            <menu class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="post.html">Post</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="feed.html">Feed</a>
-                </li>
-            </menu>
-        </nav>
-    </header>
-
-    <main class="container-fluid text-center">
-        <div>
-            <div id="picture" class="picture-box">
-                <img width="400px" src="sunshine.jpg" alt="random" />
-            </div>
-            <p id="zen-quote">
-                Zen Quote placeholder (public API)
-            </p>
-            <h1>Welcome to Scatter Sunshine</h1>
-            <p id="instruction">
-                Login to a pre-existing account or register a new account to scatter your sunshine.
-            </p>
-        </div>
-
-        <form method="get" action="post.html">
-            <div class="input-group mb-3">
-                <!-- <span class="input-group-text">@</span> -->
-                <input class="form-control" type="text" placeholder="username" />
-            </div>
-            <div class="input-group mb-3">
-                <!-- <span class="input-group-text">🔒</span> -->
-                <input class="form-control" type="password" placeholder="password" />
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-            <button type="submit" class="btn">Register</button>
-        </form>
-    </main>
-
-
-    <footer class="text-white">
-        <div class="container-fluid">
-            <span class="text-reset">Bethany Edwards</span>
-            <a class="text-reset" href="https://github.com/eddieblu/startup">GitHub Source</a>
-        </div>
-    </footer>
-
-</body>
-
+    <title>Simon React</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/index.jsx"></script>
+  </body>
 </html>
