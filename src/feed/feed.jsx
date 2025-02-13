@@ -6,7 +6,7 @@ import './feed.css';
 
 export function Feed() {
   return (
-    <main className="container-fluid text-center">
+    <main className="body container-fluid text-center">
       <div className="container-fluid text-center">
 
         <h1>Sunlight Feed</h1>
@@ -22,7 +22,7 @@ export function Feed() {
           User: @<span>myusername</span>
         </p>
         <p>
-          This feed contains scattered sunshine from you and the community. You just made someone's day brighter!
+          Thanks for scattering your sunshine with the community. You just made someone's day brighter!
         </p>
       </div>
 

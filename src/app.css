@@ -3,7 +3,7 @@
   flex-direction: column;
   min-width: 375px;
   font-family: 'Verdana', sans-serif;
-  background-color: #EFBC47;
+  color: black;
 }
 
 header {
@@ -36,10 +36,21 @@ menu {
   list-style: none;
 }
 
+h1 {
+  font-weight: bold;
+}
+
 .navbar-brand {
   padding-left: 0.3em;
 }
 
+.navbar .nav-link h1 {
+  margin-right: 1.5rem;
+}
+
+.navbar-nav {
+  gap: 1em;
+}
 menu .nav-item {
   padding: 0 0.3em;
 }
@@ -61,16 +72,4 @@ footer a {
     flex: 1 100vh;
     padding: 10vh;
   }
-}
-
-
-/* specific css */
-
-#zen-quote {
-  padding-top: 1rem;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
 }

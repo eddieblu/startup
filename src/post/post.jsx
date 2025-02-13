@@ -5,7 +5,7 @@ import './post.css';
 
 export function Post() {
   return (
-    <main className="container-fluid text-center">
+    <main className="body container-fluid text-center">
       <div>
         <h1>Share Your Light</h1>
         <div id="streak-counter">

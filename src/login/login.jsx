@@ -1,8 +1,9 @@
 import React from 'react';
+import './login.css';
 
 export function Login() {
   return (
-    <main className="container-fluid text-center">
+    <main className="body container-fluid text-center">
         <div>
             <div id="picture" className="picture-box">
                 <img width="400px" src="sunshine.jpg" alt="random" />
