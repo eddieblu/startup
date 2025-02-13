@@ -82,7 +82,7 @@ For this deliverable I did the following.
 
 For this deliverable I did the following.
 
-- [x] **Bundled using Vite** - React is bundled into .js in dist using Vite.
+- [x] **Bundled using Vite** - React .jsx code is bundled into .js code in the dist directory using Vite.
 - [x] **Components** - Login, Feed, and Post are all reactive components in the App component.
 - [x] **Router** - Routing between login, feed and post components.
 
