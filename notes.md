@@ -80,6 +80,21 @@ The command ./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup is execu
 
 * Auto reload does not work without < head > and < body >
 
+**Run Commit and Sync in one click**
+
+In VS Code, you can combine the Commit and Sync actions into a single step by enabling the setting:
+
+Enable "Commit and Sync" in VS Code
+1. Open VS Code.
+2. Go to File > Preferences > Settings (or press Ctrl + ,).
+3. Search for: 
+```
+git.postCommitCommand
+```
+4. Change the setting to sync:
+  - Default: none (Only commits)
+  - Change to: sync (Commits and syncs automatically)
+
 
 
 
