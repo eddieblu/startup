@@ -74,7 +74,7 @@ The command ./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup is execu
  * The -s option might specify a mode, operation, or configuration related to the script. In this case, startup is likely a specific mode or set of instructions (e.g., running startup-related commands or preparing the server environment for deployment).
 
 
-## VS CODE
+## VS CODE Notes
 
 **Live Server**
 
@@ -97,6 +97,26 @@ git.postCommitCommand
 
 
 
+## JavaScript Notes
+
+**Array functions**
+
+The Array object has several interesting static functions associated with it. Here are some of the interesting ones.
+
+| Function | Meaning                                                   | Example                       |
+| -------- | --------------------------------------------------------- | ----------------------------- |
+| push     | Add an item to the end of the array                       | `a.push(4)`                   |
+| pop      | Remove an item from the end of the array                  | `x = a.pop()`                 |
+| slice    | Return a sub-array                                        | `a.slice(1,-1)`               |
+| sort     | Run a function to sort an array in place                  | `a.sort((a,b) => b-a)`        |
+| values   | Creates an iterator for use with a `for of` loop          | `for (i of a.values()) {...}` |
+| find     | Find the first item satisfied by a test function          | `a.find(i => i < 2)`          |
+| forEach  | Run a function on each array item                         | `a.forEach(console.log)`      |
+| reduce   | Run a function to reduce each array item to a single item | `a.reduce((a, c) => a + c)`   |
+| map      | Run a function to map an array to a new array             | `a.map(i => i+i)`             |
+| filter   | Run a function to remove items                            | `a.filter(i => i%2)`          |
+| every    | Run a function to test if all items match                 | `a.every(i => i < 3)`         |
+| some     | Run a function to test if any items match                 | `a.some(i => i < 1)`          |
 
 
 ## AWS Notes
