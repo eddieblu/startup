@@ -21,6 +21,7 @@
 - [Change VS Code Workspace Themes](https://medium.com/@juris.savos/setting-a-per-project-colour-scheme-in-vscode-89cc5836b1de)
 - [Font Awesome Icons](https://fontawesome.com/icons/)
 - [Steps to clone to dev environment](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
+- [React Hooks](https://react.dev/reference/react/hooks)
 
 
 
