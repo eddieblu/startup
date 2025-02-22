@@ -1,18 +1,23 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './app.css';
-
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
 import { Post } from './post/post';
 import { Feed } from './feed/feed';
+import { AuthState } from './login/authState';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './app.css';
+
 
 export default function App() {
+    const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
+    const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+    const [authState, setAuthState] = React.useState(currentAuthState);
+
     return (
         <BrowserRouter>
-            <div className="body bg-dark text-light">
+            <div className="body bg-dark">
                 <header className="container-fluid">
-                    <nav className="navbar navbar-dark">
+                    <nav className="navbar navbar-dark text-light">
                         <NavLink className='nav-link' to='/'>
                             <h1>Scatter Sunshine</h1>
                         </NavLink>
@@ -20,20 +25,41 @@ export default function App() {
                             <li className="nav-item">
                                 <NavLink className='nav-link' to='/'>Home</NavLink>
                             </li>
-                            <li className="nav-item">
-                                <NavLink className='nav-link' to='post'>Post</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className='nav-link' to='feed'>Feed</NavLink>
-                            </li>
+                            {authState === AuthState.Authenticated && (
+                                <li className='nav-item'>
+                                    <NavLink className='nav-link' to='post'>
+                                        Post
+                                    </NavLink>
+                                </li>
+                            )}
+                            {authState === AuthState.Authenticated && (
+                                <li className='nav-item'>
+                                    <NavLink className='nav-link' to='feed'>
+                                        Feed
+                                    </NavLink>
+                                </li>
+                            )}
                         </menu>
                     </nav>
                 </header>
 
                 <Routes>
-                    <Route path='/' element={<Login />} exact />
-                    <Route path='/post' element={<Post />} />
-                    <Route path='/feed' element={<Feed />} />
+                    <Route
+                        path='/'
+                        element={
+                            <Login
+                                userName={userName}
+                                authState={authState}
+                                onAuthChange={(userName, authState) => {
+                                    setAuthState(authState);
+                                    setUserName(userName);
+                                }}
+                            />
+                        }
+                        exact
+                    />
+                    <Route path='/post' element={<Post userName={userName} />} />
+                    <Route path='/feed' element={<Feed userName={userName} />} />
                     <Route path='*' element={<NotFound />} />
                 </Routes>
                 <footer className="text-white">
@@ -42,7 +68,6 @@ export default function App() {
                         <a className="text-reset" href="https://github.com/eddieblu/startup">GitHub Source</a>
                     </div>
                 </footer>
-
             </div>
         </BrowserRouter>
     );

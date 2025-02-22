@@ -31,7 +31,6 @@ footer {
 menu {
   flex: 1;
   display: flex;
-  /*  overwrite Bootstrap so the menu does not wrap */
   flex-direction: row !important;
   list-style: none;
 }
@@ -51,12 +50,26 @@ h1 {
 .navbar-nav {
   gap: 1em;
 }
+
 menu .nav-item {
   padding: 0 0.3em;
 }
 
 footer a {
   float: right;
+}
+
+.btn-primary {
+  background-color: #ffa500 !important;
+  border-color: #ffa500 !important;
+  margin: 1rem 1rem;
+}
+
+.btn-secondary {
+  color: black !important;
+  background-color: #f7eba8 !important;
+  border-color: #ffa500 !important;
+  margin: 1rem 1rem;
 }
 
 @media (max-height: 600px) {
@@ -73,3 +86,4 @@ footer a {
     padding: 10vh;
   }
 }
+
