@@ -61,7 +61,7 @@ export function Post(props) {
   return (
     <main className="body container-fluid text-center">
       <h1>Share Your Light</h1>
-      <p className="form-label">Share your daily post to view sunshine posts from the community.</p>
+      <p className="label">Share your daily post to view sunshine posts from the community.</p>
 
       <div className="header-row">
         <p className="user-info">User: @{props.userName}</p>
@@ -75,7 +75,6 @@ export function Post(props) {
         <div className="mb-3">
           <textarea
             className="form-control"
-            // id="postTextarea"
             rows="4"
             maxLength="150"
             value={postContent}

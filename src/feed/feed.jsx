@@ -5,35 +5,35 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import './feed.css';
 
 export function Feed(props) {
-  const [latestPost, setLatestPost] = React.useState('');
+  const [postContent, setPostContent] = React.useState('');
+  const [streak, setStreak] = React.useState(0);
+
 
   React.useEffect(() => {
     const storedLatestPost = localStorage.getItem('latestPost');
     if (storedLatestPost) {
-      setLatestPost(storedLatestPost);
+      setPostContent(storedLatestPost);
+    }
+
+    const storedStreak = localStorage.getItem('streak');
+    if (storedStreak) {
+      setStreak(parseInt(storedStreak));
     }
   }, []);
 
   return (
     <main className="body container-fluid text-center">
-      <div className="container-fluid text-center">
+      <h1>Sunlight Feed</h1>
+      <p className="label">Thanks for sharing. You just made someone's day brighter!</p>
 
-        <h1>Sunlight Feed</h1>
+      <div className="header-row">
+        <p className="user-info">User: @{props.userName}</p>
         <div id="streak-counter">
-          <FontAwesomeIcon
-            icon={faSun}
-            className="icon-gap"
-            style={{ color: 'rgb(255, 208, 0)' }}
-          />
-          <span id="streak-count">4</span> day streak
+          <FontAwesomeIcon icon={faSun} className="icon-gap" style={{ color: 'rgb(255, 208, 0)' }} />
+          <span id="streak-count">{streak}</span> day streak
         </div>
-        <p>
-          User: @<span>{props.userName}</span>
-        </p>
-        <p>
-          Thanks for scattering your sunshine with the community. You just made someone's day brighter!
-        </p>
       </div>
+
 
       <div className="container my-4">
         <div className="row row-cols-1 row-cols-md-3 g-4">
@@ -45,7 +45,7 @@ export function Feed(props) {
               </div>
               <div className="card-body">
                 <p className="card-text">
-                  {latestPost}
+                  {postContent}
                 </p>
               </div>
               <div className="card-footer d-flex align-items-center">
