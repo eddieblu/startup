@@ -1,8 +1,12 @@
 #zen-quote {
-    padding-top: 1rem;
-  }
-  
-  img {
-    max-width: 100%;
-    height: auto;
-  }
+  padding-top: 2rem;
+}
+
+#picture {
+  padding-bottom: 2rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
