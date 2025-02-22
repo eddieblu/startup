@@ -1,22 +1,37 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 import './post.css';
 
 export function Post(props) {
   const [postContent, setPostContent] = React.useState('');
   const [streak, setStreak] = React.useState(0);
+  const [hasPostedToday, setHasPostedToday] = React.useState(false);
+
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const storedStreak = localStorage.getItem('streak');
     if (storedStreak) {
       setStreak(parseInt(storedStreak));
     }
+
+    const today = new Date().toDateString();
+    const storedLastPostDate = localStorage.getItem('lastPostDate');
+    const storedLatestPost = localStorage.getItem('latestPost');
+
+    if (storedLastPostDate === today && storedLatestPost) {
+      setPostContent(storedLatestPost);
+      setHasPostedToday(true);
+    }
+
   }, []);
 
   function updateStreak() {
     const today = new Date().toDateString();
     const storedLastPostDate = localStorage.getItem('lastPostDate');
+
 
     if (!storedLastPostDate || storedLastPostDate !== today) {
       setStreak(prev => {
@@ -30,8 +45,17 @@ export function Post(props) {
 
   function handlePostSubmit(e) {
     e.preventDefault();
+    const today = new Date().toDateString();
+
     localStorage.setItem('latestPost', postContent);
-    updateStreak();
+    if (!hasPostedToday) {
+      updateStreak();
+      setHasPostedToday(true);
+    } else {
+      localStorage.setItem('lastPostDate', today);
+    }
+
+    navigate('/feed');
   }
 
   return (
@@ -46,11 +70,12 @@ export function Post(props) {
           <span id="streak-count">{streak}</span> day streak
         </div>
       </div>
+
       <form onSubmit={handlePostSubmit}>
         <div className="mb-3">
           <textarea
             className="form-control"
-            id="postTextarea"
+            // id="postTextarea"
             rows="4"
             maxLength="150"
             value={postContent}
@@ -61,7 +86,9 @@ export function Post(props) {
             Text limit is 150 characters.
           </div>
         </div>
-        <button type="submit" className="btn btn-primary">Post</button>
+        <button type="submit" className="btn btn-primary">
+          {hasPostedToday ? 'Update' : 'Post'}
+        </button>
       </form>
     </main>
   );
