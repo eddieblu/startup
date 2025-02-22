@@ -7,7 +7,7 @@ Scatter Sunshine is a daily reflection platform inspired by the beloved hymn “
 
 ## 🚀 Specification Deliverable
 
-For this deliverable, I did the following. I checked the box `[x]` and added a description for things I completed.
+For this deliverable, I did the following. 
 
 - [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
@@ -49,13 +49,13 @@ I am going to use the required technologies in the following ways.
 
 ## 🚀 AWS deliverable
 
-For this deliverable, I did the following. I checked the box `[x]` and added a description for things I completed.
+For this deliverable, I did the following. 
 
 - [x] **Server deployed and accessible with custom domain name** - [My server link](https://edwardscs.click).
 
 ## 🚀 HTML deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+For this deliverable I did the following. 
 
 - [x] **HTML pages** - Three different pages. One for each view. `index.html` (Login/Register), `post.html`, and `feed.html`.
 - [x] **Proper HTML element usage** - I researched for relevant elements that I could use. I used header, footer, main, nav, a, input, button, form, textarea, i, and img.
@@ -69,7 +69,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ## 🚀 CSS deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+For this deliverable I did the following. 
 
 - [x] **Header, footer, and main content body** - Each component is styled on all pages.
 - [x] **Navigation elements** - I dropped the underline and changed the colour for which page is active.
@@ -80,11 +80,11 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ## 🚀 React part 1: Routing deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+For this deliverable I did the following.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - Routing between login and voting components.
+- [x] **Bundled using Vite** - React .jsx code is bundled into .js code in the dist directory using Vite.
+- [x] **Components** - Login, Feed, and Post are all reactive components in the App component.
+- [x] **Router** - Routing between login, feed and post components.
 
 ## 🚀 React part 2: Reactivity
 
