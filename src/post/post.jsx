@@ -4,32 +4,59 @@ import { faSun } from '@fortawesome/free-solid-svg-icons';
 import './post.css';
 
 export function Post(props) {
+  const [postContent, setPostContent] = React.useState('');
+  const [streak, setStreak] = React.useState(0);
+
+  React.useEffect(() => {
+    const storedStreak = localStorage.getItem('streak');
+    if (storedStreak) {
+      setStreak(parseInt(storedStreak));
+    }
+  }, []);
+
+  function updateStreak() {
+    const today = new Date().toDateString();
+    const storedLastPostDate = localStorage.getItem('lastPostDate');
+
+    if (!storedLastPostDate || storedLastPostDate !== today) {
+      setStreak(prev => {
+        const newStreak = prev + 1;
+        localStorage.setItem('streak', newStreak);
+        return newStreak;
+      });
+      localStorage.setItem('lastPostDate', today);
+    }
+  }
+
+  function handlePostSubmit(e) {
+    e.preventDefault();
+    localStorage.setItem('latestPost', postContent);
+    updateStreak();
+  }
+
   return (
     <main className="body container-fluid text-center">
-      <div>
-        <h1>Share Your Light</h1>
+      <h1>Share Your Light</h1>
+      <p className="form-label">Share your daily post to view sunshine posts from the community.</p>
+
+      <div className="header-row">
+        <p className="user-info">User: @{props.userName}</p>
+        <div id="streak-counter">
+          <FontAwesomeIcon icon={faSun} className="icon-gap" style={{ color: 'rgb(255, 208, 0)' }} />
+          <span id="streak-count">{streak}</span> day streak
+        </div>
       </div>
-
-      <form method="get" action="feed">
-
+      <form onSubmit={handlePostSubmit}>
         <div className="mb-3">
-          <label for="postTextarea" className="form-label">
-            Share your daily post to view sunshine posts from the community.
-            <div className="user-header">
-              <p className="user-info">
-                User: @<span>{props.userName}</span>
-              </p>
-              <div id="streak-counter">
-                <FontAwesomeIcon
-                  icon={faSun}
-                  className="icon-gap"
-                  style={{ color: 'rgb(255, 208, 0)' }}
-                />
-                <span id="streak-count">3</span> day streak
-              </div>
-            </div>
-          </label>
-          <textarea className="form-control" id="postTextarea" rows="4" placeholder="How did the sun shine for you today?" maxlength="150"></textarea>
+          <textarea
+            className="form-control"
+            id="postTextarea"
+            rows="4"
+            maxLength="150"
+            value={postContent}
+            onChange={(e) => setPostContent(e.target.value)}
+            placeholder="How did the sun shine for you today?"
+          />
           <div className="form-text">
             Text limit is 150 characters.
           </div>
