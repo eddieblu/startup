@@ -4,7 +4,16 @@ import { faSun } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import './feed.css';
 
-export function Feed() {
+export function Feed(props) {
+  const [latestPost, setLatestPost] = React.useState('');
+
+  React.useEffect(() => {
+    const storedLatestPost = localStorage.getItem('latestPost');
+    if (storedLatestPost) {
+      setLatestPost(storedLatestPost);
+    }
+  }, []);
+
   return (
     <main className="body container-fluid text-center">
       <div className="container-fluid text-center">
@@ -19,7 +28,7 @@ export function Feed() {
           <span id="streak-count">4</span> day streak
         </div>
         <p>
-          User: @<span>myusername</span>
+          User: @<span>{props.userName}</span>
         </p>
         <p>
           Thanks for scattering your sunshine with the community. You just made someone's day brighter!
@@ -32,11 +41,11 @@ export function Feed() {
           <div className="col">
             <div className="card h-100">
               <div className="card-header">
-                @<span className="username">myusername</span>
+                @<span className="username">{props.userName}</span>
               </div>
               <div className="card-body">
                 <p className="card-text">
-                  So grateful for my morning run and the blue skies!
+                  {latestPost}
                 </p>
               </div>
               <div className="card-footer d-flex align-items-center">
