@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { PostCard } from './postCard';
 import './feed.css';
 
 export function Feed(props) {
@@ -9,7 +9,7 @@ export function Feed(props) {
   const [otherPosts, setOtherPosts] = React.useState([]);
   const [streak, setStreak] = React.useState(0);
 
-  // Helper to generate random new posts (placeholders for WebSocket data)
+  // Helper to generate random new posts (placeholder for WebSocket data)
   function generateRandomPost() {
     const randomUser = 'randomUser' + Math.floor(Math.random() * 100000);
     
@@ -77,7 +77,6 @@ export function Feed(props) {
       setOtherPosts((prevPosts) => [...prevPosts, newRandomPost]);
     }, 10000);
 
-    // Cleanup interval when unmounting
     return () => clearInterval(intervalId);
   }, [props.userName]);
 
@@ -104,54 +103,30 @@ export function Feed(props) {
         </div>
       </div>
 
-
       <div className="container my-4">
         <div className="row row-cols-1 row-cols-md-3 g-4">
-          {/* user's post is always first */}
-          {userPost && (
-            <div className="col" key="userPost">
-              <div className="card h-100">
-                <div className="card-header">
-                  @<span className="username">{userPost.username}</span>
-                </div>
-                <div className="card-body">
-                  <p className="card-text">{userPost.content}</p>
-                </div>
-                <div className="card-footer d-flex align-items-center">
-                  <button className="btn btn-link p-0 me-2" style={{ fontSize: '1.2rem' }}>
-                    <FontAwesomeIcon icon={faHeart} className="text-danger" />
-                  </button>
-                  <span className="heart-count">{userPost.hearts}</span>
-                </div>
-              </div>
-            </div>
-          )}
+          {/* User's post */}
+          <div className="col" key="userPost">
+            <PostCard
+              username={userPost.username}
+              content={userPost.content}
+              hearts={userPost.hearts}
+            />
+          </div>
 
-
-          {/* other posts follow */}
+          {/* Other posts */}
           {otherPosts.map((post, idx) => (
             <div className="col" key={idx}>
-              <div className="card h-100">
-                <div className="card-header">
-                  @<span className="username">{post.username}</span>
-                </div>
-                <div className="card-body">
-                  <p className="card-text">{post.content}</p>
-                </div>
-                <div className="card-footer d-flex align-items-center">
-                  <button className="btn btn-link p-0 me-2" style={{ fontSize: '1.2rem' }}>
-                    <FontAwesomeIcon icon={faHeart} className="text-danger" />
-                  </button>
-                  <span className="heart-count">{post.hearts}</span>
-                </div>
-              </div>
+              <PostCard
+                username={post.username}
+                content={post.content}
+                hearts={post.hearts}
+              />
             </div>
           ))}
 
         </div>
       </div>
-
-
     </main>
   );
 }
