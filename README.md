@@ -2,12 +2,12 @@
 
 [My Notes](notes.md)
 
-Scatter Sunshine is a daily reflection platform inspired by the beloved hymn “There Is Sunshine in My Soul Today,” encouraging short, uplifting posts in a warm, faith-centered atmosphere. Each new post unlocks a real-time community feed with instant heart reactions, while a sun icon tracks your streak. Entries automatically expire at the day’s end for a fresh start every morning. 
+Scatter Sunshine is a daily reflection platform inspired by the beloved hymn “There Is Sunshine in My Soul Today,” encouraging short, uplifting posts in a warm, faith-centered atmosphere. Each new post unlocks a real-time community feed<!-- with instant heart reactions-->, while a sun icon tracks your streak. Entries automatically expire at the day’s end for a fresh start every morning. 
 
 
 ## 🚀 Specification Deliverable
 
-For this deliverable, I did the following. 
+For this deliverable, I did the following:
 
 - [x] Proper use of Markdown
 - [x] A concise and compelling elevator pitch
@@ -17,7 +17,7 @@ For this deliverable, I did the following.
 
 ### Elevator pitch
 
-Scatter Sunshine is an innovative twist on daily positivity, blending spiritual well-being into an optimistic social network. One post each day unlocks a feed of cheerful entries, sparking real-time encouragement through heart-reacts and streak-driven consistency. Whether you’re looking to cultivate an empowering routine of looking on the bright side or find uplifting support from a like-minded community, Scatter Sunshine is here to guide you toward a brighter life—one day at a time.
+Scatter Sunshine is an innovative twist on daily positivity, blending spiritual well-being into an optimistic social network. One post each day unlocks a feed of cheerful entries, sparking real-time encouragement through <!--heart-reacts and -->streak-driven consistency. Whether you’re looking to cultivate an empowering routine of looking on the bright side or find uplifting support from a like-minded community, Scatter Sunshine is here to guide you toward a brighter life—one day at a time.
 
 
 ### Design
@@ -28,34 +28,34 @@ Scatter Sunshine is an innovative twist on daily positivity, blending spiritual 
 
 - Secure login over HTTPS
 - Daily 150-character positivity posts
-- Real-time feed with heart reactions
+<!-- - Real-time feed with heart reactions -->
 - Sun icon for streak tracking
 - Automatic expiry of daily entries
 
   
 ### Technologies
 
-I am going to use the required technologies in the following ways.
+I am going to use the required technologies in the following ways:
 
 - **HTML** - Three different views: login/register controls, positivity posting, and positivity feed.
 - **CSS** - Complementary colour scheme and responsive design for different screen sizes.
-- **JavaScript** – Handles user interactions (clicking “heart," posting positivity). Updates the UI in real-time through state changes.
+- **JavaScript** – Handles user interactions (<!--clicking “heart," -->posting positivity). Updates the UI in real-time through state changes.
 - **React** - Single page application with routing between views and reactive user controls. 
 - **Web Services** - Backend service with endpoints for authentication, submitting and retrieving posts, and real-time reactions. Third party call to get Zen quotes.
 - **Authentication** – Register and login users. Users must be authenticated to post, view posts or react.
-- **Database** - Stores authentication, positivity posts, and heart-react data. Automatically removes posts at midnight MST. 
-- **WebSocket** - Broadcasts new posts and heart-reacts.
+- **Database** - Stores authentication, and positivity posts<!--, and heart-react data-->. Automatically removes posts at midnight MST. 
+- **WebSocket** - Broadcasts new posts <!-- and heart-reacts. -->
   
 
 ## 🚀 AWS deliverable
 
-For this deliverable, I did the following. 
+For this deliverable, I did the following:
 
 - [x] **Server deployed and accessible with custom domain name** - [My server link](https://edwardscs.click).
 
 ## 🚀 HTML deliverable
 
-For this deliverable I did the following. 
+For this deliverable I did the following: 
 
 - [x] **HTML pages** - Three different pages. One for each view. `index.html` (Login/Register), `post.html`, and `feed.html`.
 - [x] **Proper HTML element usage** - I researched for relevant elements that I could use. I used header, footer, main, nav, a, input, button, form, textarea, i, and img.
@@ -65,11 +65,11 @@ For this deliverable I did the following.
 - [x] **Images** - Image is displayed on the Login page.
 - [x] **Login placeholder** - Placeholder for auth on the login page.
 - [x] **DB data placeholder** - Gratitude posts displayed on feed page showing content stored in database.  
-- [x] **WebSocket placeholder** - The feed page has placeholders for posts and heart reacts that will update in real-time. 
+- [x] **WebSocket placeholder** - The feed page has placeholders for posts <!-- and heart reacts --> that will update in real-time. 
 
 ## 🚀 CSS deliverable
 
-For this deliverable I did the following. 
+For this deliverable I did the following: 
 
 - [x] **Header, footer, and main content body** - Each component is styled on all pages.
 - [x] **Navigation elements** - I dropped the underline and changed the colour for which page is active.
@@ -80,7 +80,7 @@ For this deliverable I did the following.
 
 ## 🚀 React part 1: Routing deliverable
 
-For this deliverable I did the following.
+For this deliverable I did the following:
 
 - [x] **Bundled using Vite** - React .jsx code is bundled into .js code in the dist directory using Vite.
 - [x] **Components** - Login, Feed, and Post are all reactive components in the App component.
@@ -88,10 +88,10 @@ For this deliverable I did the following.
 
 ## 🚀 React part 2: Reactivity
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+For this deliverable I did the following:
 
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] **All functionality implemented or mocked out** - I implemented all the functionality of logging in/registering, making a post, and viewing the feed. The database and websocket functionality are mocked out. You can make a post, update it, and your streak updates automatically when you post. The localStorage (mocked database) holds post content and streak count. Posts are automatically generated and loaded onto the screen to mock the websockets. I previously planned to have a real-time heart reaction capability, but it was too complicated, so I removed it for now (I will keep trying, but it might be beyond my level).
+- [x] **Hooks** - I used useState and useEffect on the feed and post views for the streak counter, logged in user's post and feed posts.
 
 ## 🚀 Service deliverable
 
