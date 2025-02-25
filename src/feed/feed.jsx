@@ -12,7 +12,7 @@ export function Feed(props) {
   // Helper to generate random new posts (placeholder for WebSocket data)
   function generateRandomPost() {
     const randomUser = 'randomUser' + Math.floor(Math.random() * 100000);
-    
+    //add comment for the commit
     
     const possibleMessages = [
       'I discovered a new soda shop!',
