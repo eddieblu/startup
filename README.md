@@ -90,7 +90,7 @@ For this deliverable I did the following:
 
 For this deliverable I did the following:
 
-- [x] **All functionality implemented or mocked out** - I implemented all the functionality of logging in/registering, making a post, and viewing the feed. The database and websocket functionality are mocked out. You can make a post, update it, and your streak updates automatically when you post. The localStorage (mocked database) holds post content and streak count. Posts are automatically generated and loaded onto the screen to mock the websockets. I previously planned to have a real-time heart reaction capability, but it was too complicated, so I removed it for now (I will keep trying, but it might be beyond my level).
+- [x] **All functionality implemented or mocked out** - I implemented all the functionality of logging in/registering, making a post, and viewing the feed. The database and websocket functionality are mocked out. You can make a post, update it, and your streak updates automatically when you post. The localStorage (mocked database) holds post content and streak count. Posts are automatically generated and loaded onto the screen to mock the websockets. The 3rd party call for a Zen Quote (see login page) is also mocked out. I previously planned to have a real-time heart reaction capability, but it was too complicated, so I removed it for now (I will keep trying, but it might be beyond my level).
 - [x] **Hooks** - I used useState and useEffect on the feed and post views for the streak counter, logged in user's post and feed posts.
 
 ## 🚀 Service deliverable
