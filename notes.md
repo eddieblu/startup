@@ -120,9 +120,9 @@ The Array object has several interesting static functions associated with it. He
 | some     | Run a function to test if any items match                 | `a.some(i => i < 1)`          |
 
 
-## AWS Notes
+## React Notes
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+You can pass around objects between classes in .jsx files using props or another variable name and access the whole object if you need it all, or you can pass in specific items of the object. I will rewrite this later when I understand it at a deeper level, but I want to keep note of it for now :)
 
 ## HTML Notes
 

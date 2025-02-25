@@ -1,8 +1,9 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
-export function PostCard({ username, content, hearts }) {
+// export function PostCard({ username, content, hearts }) {
+export function PostCard({ username, content }) {
   return (
     <div className="card h-100">
       <div className="card-header">@<span className="username">{username}</span></div>
