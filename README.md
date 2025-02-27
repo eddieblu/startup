@@ -2,7 +2,7 @@
 
 [My Notes](notes.md)
 
-Scatter Sunshine is a daily reflection platform inspired by the beloved hymn “There Is Sunshine in My Soul Today,” encouraging short, uplifting posts in a warm, faith-centered atmosphere. Each new post unlocks a real-time community feed with instant heart reactions, while a sun icon tracks your streak. Entries automatically expire at the day’s end for a fresh start every morning. 
+Scatter Sunshine is a daily reflection platform inspired by the beloved hymn “There Is Sunshine in My Soul Today,” encouraging short, uplifting posts in a warm, faith-centered atmosphere. Each new post unlocks a real-time community feed with a sun icon to track your streak. Entries automatically expire at the day’s end for a fresh start every morning. 
 
 
 ## 🚀 Specification Deliverable
@@ -17,7 +17,7 @@ For this deliverable, I did the following:
 
 ### Elevator pitch
 
-Scatter Sunshine is an innovative twist on daily positivity, blending spiritual well-being into an optimistic social network. One post each day unlocks a feed of cheerful entries, sparking real-time encouragement through heart-reacts and streak-driven consistency. Whether you’re looking to cultivate an empowering routine of looking on the bright side or find uplifting support from a like-minded community, Scatter Sunshine is here to guide you toward a brighter life—one day at a time.
+Scatter Sunshine is an innovative twist on daily positivity, blending spiritual well-being into an optimistic social network. One post each day unlocks a feed of cheerful entries with a sunny streak-driven consistency. Whether you’re looking to cultivate an empowering routine of looking on the bright side or find uplifting support from a like-minded community, Scatter Sunshine is here to guide you toward a brighter life—one day at a time.
 
 
 ### Design
@@ -28,7 +28,6 @@ Scatter Sunshine is an innovative twist on daily positivity, blending spiritual 
 
 - Secure login over HTTPS
 - Daily 150-character positivity posts
-- Real-time feed with heart reactions
 - Sun icon for streak tracking
 - Automatic expiry of daily entries
 
@@ -39,12 +38,12 @@ I am going to use the required technologies in the following ways:
 
 - **HTML** - Three different views: login/register controls, positivity posting, and positivity feed.
 - **CSS** - Complementary colour scheme and responsive design for different screen sizes.
-- **JavaScript** – Handles user interactions (clicking “heart," posting positivity). Updates the UI in real-time through state changes.
+- **JavaScript** – Handles user interactions (making posts). Updates the UI in real-time through state changes.
 - **React** - Single page application with routing between views and reactive user controls. 
-- **Web Services** - Backend service with endpoints for authentication, submitting and retrieving posts, and real-time reactions. Third party call to get Zen quotes.
+- **Web Services** - Backend service with endpoints for authentication, and submitting and retrieving posts. Third party call to get Zen quotes.
 - **Authentication** – Register and login users. Users must be authenticated to post, view posts or react.
-- **Database** - Stores authentication, and positivity posts, and heart-react data. Automatically removes posts at midnight MST. 
-- **WebSocket** - Broadcasts new posts and heart-reacts.
+- **Database** - Stores authentication and post data. Automatically removes posts at midnight MST. 
+- **WebSocket** - Broadcasts new posts.
   
 
 ## 🚀 AWS deliverable
@@ -65,7 +64,7 @@ For this deliverable I did the following:
 - [x] **Images** - Image is displayed on the Login page.
 - [x] **Login placeholder** - Placeholder for auth on the login page.
 - [x] **DB data placeholder** - Gratitude posts displayed on feed page showing content stored in database.  
-- [x] **WebSocket placeholder** - The feed page has placeholders for posts and heart reacts that will update in real-time. 
+- [x] **WebSocket placeholder** - The feed page has placeholders for posts that will update in real-time. 
 
 ## 🚀 CSS deliverable
 
@@ -92,8 +91,6 @@ For this deliverable I did the following:
 
 - [x] **All functionality implemented or mocked out** - I implemented all the functionality of logging in/registering, making a post, and viewing the feed. You can make a post and update it, and your streak increases automatically when you post. The localStorage (mocked database) holds post content and streak counts. Posts are automatically generated and loaded onto the screen to mock the websockets. The 3rd party call for a Zen Quote (see login page) is also mocked out. 
 - [x] **Hooks** - I used useState and useEffect on the feed and post views for the streak counter, logged in user's post and feed posts.
-
-Note: I previously planned to have additional features, but I am having a hard time implementing them beecause they are rather complex. I removed them for now, but I will keep trying. If I cannot get them all, I will permanently remove them from the project for simplicity's sake. The missing features are: real-time heart reacts, posts expiring at midnight, and the streak resetting if you didn't post the previous day.
 
 ## 🚀 Service deliverable
 
