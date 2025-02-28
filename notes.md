@@ -9,6 +9,7 @@
 1. Do I need to include a <mark>Deployment Instructions section?</mark>
 2. How can I configure the startup link from my root [Web Programming 260](https://edwardscs.click/) page to lead to my own [startup](https://startup.edwardscs.click/)?
 3. I want to deepen my implementation. Currently, the app is FINE but I'd like to implement 3 more things: heart reacts, the posts expiring and deleting at midnight MST, and the streak resetting if you didn't post the day before. None of these are necessary for full points (I think) but I'd love to figure out how to do them. Not a project for today, the day being 24 Feb 2025.
+4. user cannot register account w username that already exists
 
 
 
