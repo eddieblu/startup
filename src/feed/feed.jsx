@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
+import { v4 as uuidv4 } from 'uuid';
 import { PostCard } from './postCard';
 import './feed.css';
 
@@ -9,9 +10,14 @@ export function Feed(props) {
   const [otherPosts, setOtherPosts] = React.useState([]);
   const [streak, setStreak] = React.useState(0);
 
-  // Helper to generate random new posts (placeholder for WebSocket data)
-  function generateRandomPost() {
-    const randomUser = 'randomUser' + Math.floor(Math.random() * 100000);
+  // Generate unique id
+  function generateId() {
+    return uuidv4();
+  }
+
+  // Generate random new posts (placeholder for WebSocket data)
+  function generateNewPost() {
+    const newPostUser = 'user' + Math.floor(Math.random() * 100000);
         
     const possibleMessages = [
       'I discovered a new soda shop!',
@@ -28,27 +34,32 @@ export function Feed(props) {
       'Matthew 14:27 "Be of good cheer; it is I; be not afraid."',
       'Our apartment got heart-attacked <33333',
     ];
-    const randomMessage = possibleMessages[Math.floor(Math.random() * possibleMessages.length)];
+    const newPostMessage = possibleMessages[Math.floor(Math.random() * possibleMessages.length)];
 
-    const randomHearts = Math.floor(Math.random() * 10);
+    const newPostHearts = 0;
 
     return {
-      username: randomUser,
-      content: randomMessage,
-      hearts: randomHearts,
+      id: generateId(),
+      username: newPostUser,
+      content: newPostMessage,
+      hearts: newPostHearts, // TODO: add heartedByCurrentUser
     };
   }
 
 
   React.useEffect(() => {
+    // Load the streak
     const storedStreak = localStorage.getItem('streak');
     if (storedStreak) {
       setStreak(parseInt(storedStreak, 10));
     }
 
+    
+    // Create userPost from localStorage if latestPost exists
     const storedLatestPost = localStorage.getItem('latestPost');
     if (storedLatestPost) {
       setUserPost({
+        id: generateId(),
         username: props.userName,
         content: storedLatestPost,
         hearts: 0, // TODO: do hearts logic later
@@ -56,29 +67,34 @@ export function Feed(props) {
     } else {
       setUserPost(null);
     }
-
+    
+    // Create existing/placeholder posts
     const existingPosts = [
       {
-        username: 'randomUser1',
+        id: generateId(),
+        username: 'user1',
         content: 'A stranger complimented my outfit :)',
         hearts: 3,
       },
       {
-        username: 'randomUser2',
+        id: generateId(),
+        username: 'user2',
         content: 'Got an A on my Stats Exam (phew)',
         hearts: 2,
       },
     ];
     setOtherPosts(existingPosts);    
 
+    // Start interval to generate new posts
     const intervalId = setInterval(() => {
-      const newRandomPost = generateRandomPost();
-      setOtherPosts((prevPosts) => [...prevPosts, newRandomPost]);
+      const newPost = generateNewPost();
+      setOtherPosts((prevPosts) => [...prevPosts, newPost]);
     }, 10000);
 
     return () => clearInterval(intervalId);
   }, [props.userName]);
 
+  // Gate: if user has not posted, show message
   if (!userPost) {
     return (
       <main className="body container-fluid text-center">
@@ -102,10 +118,12 @@ export function Feed(props) {
         </div>
       </div>
 
+      {/* Feed */}
       <div className="container my-4">
         <div className="row row-cols-1 row-cols-md-3 g-4">
+          
           {/* User's post */}
-          <div className="col" key="userPost">
+          <div className="col" key={userPost.id}>
             <PostCard
               username={userPost.username}
               content={userPost.content}
@@ -114,8 +132,8 @@ export function Feed(props) {
           </div>
 
           {/* Other posts */}
-          {otherPosts.map((post, idx) => (
-            <div className="col" key={idx}>
+          {otherPosts.map((post) => (
+            <div className="col" key={post.id}>
               <PostCard
                 username={post.username}
                 content={post.content}
