@@ -6,9 +6,9 @@ import { PostCard } from './postCard';
 import './feed.css';
 
 export function Feed(props) {
-  const [userPost, setUserPost] = React.useState(null);
-  const [otherPosts, setOtherPosts] = React.useState([]);
+  const [posts, setPosts] = React.useState([]);
   const [streak, setStreak] = React.useState(0);
+  const [userHasPosted, setUserHasPosted] = React.useState(false);
 
   // Generate unique id
   function generateId() {
@@ -18,7 +18,7 @@ export function Feed(props) {
   // Generate random new posts (placeholder for WebSocket data)
   function generateNewPost() {
     const newPostUser = 'user' + Math.floor(Math.random() * 100000);
-        
+
     const possibleMessages = [
       'I discovered a new soda shop!',
       'Just went for a run in the park!',
@@ -36,14 +36,28 @@ export function Feed(props) {
     ];
     const newPostMessage = possibleMessages[Math.floor(Math.random() * possibleMessages.length)];
 
-    const newPostHearts = 0;
-
     return {
       id: generateId(),
       username: newPostUser,
       content: newPostMessage,
-      hearts: newPostHearts, // TODO: add heartedByCurrentUser
+      hearts: 0,
+      isHeartedByCurrentUser: false,
     };
+  }
+
+  // Toggle boolean if post is hearted 
+  function toggleIsHearted(postId) {
+    setPosts((prevPosts) => {
+      return prevPosts.map((p) => {
+        if (p.id == postId) {
+          return {
+            ...p,
+            isHeartedByCurrentUser: !p.isHeartedByCurrentUser,
+          };
+        }
+        return p;
+      });
+    });
   }
 
 
@@ -54,20 +68,23 @@ export function Feed(props) {
       setStreak(parseInt(storedStreak, 10));
     }
 
-    
+
     // Create userPost from localStorage if latestPost exists
+    let userPost = null;
     const storedLatestPost = localStorage.getItem('latestPost');
     if (storedLatestPost) {
-      setUserPost({
+      setUserHasPosted(true);
+      userPost = {
         id: generateId(),
         username: props.userName,
         content: storedLatestPost,
-        hearts: 0, // TODO: do hearts logic later
-      });
+        hearts: 0,
+        isHeartedByCurrentUser: false,
+      };
     } else {
-      setUserPost(null);
+      setUserHasPosted(false);
     }
-    
+
     // Create existing/placeholder posts
     const existingPosts = [
       {
@@ -75,27 +92,34 @@ export function Feed(props) {
         username: 'user1',
         content: 'A stranger complimented my outfit :)',
         hearts: 3,
+        isHeartedByCurrentUser: false,
       },
       {
         id: generateId(),
         username: 'user2',
         content: 'Got an A on my Stats Exam (phew)',
         hearts: 2,
+        isHeartedByCurrentUser: false,
       },
     ];
-    setOtherPosts(existingPosts);    
+
+    if (userPost) {
+      setPosts([userPost, ...existingPosts]);
+    } else {
+      setPosts([...existingPosts]);
+    }
 
     // Start interval to generate new posts
     const intervalId = setInterval(() => {
       const newPost = generateNewPost();
-      setOtherPosts((prevPosts) => [...prevPosts, newPost]);
+      setPosts((prevPosts) => [...prevPosts, newPost]);
     }, 10000);
 
     return () => clearInterval(intervalId);
   }, [props.userName]);
 
   // Gate: if user has not posted, show message
-  if (!userPost) {
+  if (!userHasPosted) {
     return (
       <main className="body container-fluid text-center">
         <h1>Sunlight Feed</h1>
@@ -121,23 +145,12 @@ export function Feed(props) {
       {/* Feed */}
       <div className="container my-4">
         <div className="row row-cols-1 row-cols-md-3 g-4">
-          
-          {/* User's post */}
-          <div className="col" key={userPost.id}>
-            <PostCard
-              username={userPost.username}
-              content={userPost.content}
-              hearts={userPost.hearts}
-            />
-          </div>
 
-          {/* Other posts */}
-          {otherPosts.map((post) => (
+          {posts.map((post) => (
             <div className="col" key={post.id}>
               <PostCard
-                username={post.username}
-                content={post.content}
-                hearts={post.hearts}
+                post={post}
+                onToggleHeart={toggleIsHearted}
               />
             </div>
           ))}
