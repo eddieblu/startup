@@ -45,18 +45,32 @@ export function Feed(props) {
     };
   }
 
-  // Toggle boolean if post is hearted 
+  // Update hearts if post is hearted 
   function toggleIsHearted(postId) {
     setPosts((prevPosts) => {
-      return prevPosts.map((p) => {
+      const updatedPosts = prevPosts.map((p) => {
         if (p.id == postId) {
-          return {
-            ...p,
-            isHeartedByCurrentUser: !p.isHeartedByCurrentUser,
-          };
+          if (p.isHeartedByCurrentUser) {
+            return {
+              ...p,
+              hearts: (p.hearts - 1),
+              isHeartedByCurrentUser: false
+            }
+          } else {
+            return {
+              ...p,
+              hearts: (p.hearts + 1),
+              isHeartedByCurrentUser: true
+            };
+          }
         }
         return p;
       });
+
+      localStorage.setItem('posts', JSON.stringify(updatedPosts));
+
+      // return to update state
+      return updatedPosts;
     });
   }
 
@@ -68,52 +82,66 @@ export function Feed(props) {
       setStreak(parseInt(storedStreak, 10));
     }
 
+    // Check for and load existing posts
+    const storedPosts = localStorage.getItem('posts');
+    if (storedPosts) {
+      const parsedPosts = JSON.parse(storedPosts);
+      setPosts(parsedPosts);
 
-    // Create userPost from localStorage if latestPost exists
-    let userPost = null;
-    const storedLatestPost = localStorage.getItem('latestPost');
-    if (storedLatestPost) {
-      setUserHasPosted(true);
-      userPost = {
-        id: generateId(),
-        username: props.userName,
-        content: storedLatestPost,
-        hearts: 0,
-        isHeartedByCurrentUser: false,
-      };
+      const storedUserPost = parsedPosts.find(p => p.username === props.userName);
+      setUserHasPosted(!!storedUserPost);
     } else {
-      setUserHasPosted(false);
-    }
+      // Create userPost from localStorage if latestPost exists
+      let userPost = null;
+      const storedLatestPost = localStorage.getItem('latestPost');
+      if (storedLatestPost) {
+        setUserHasPosted(true);
+        userPost = {
+          id: generateId(),
+          username: props.userName,
+          content: storedLatestPost,
+          hearts: 0,
+          isHeartedByCurrentUser: false,
+        };
+      } else {
+        setUserHasPosted(false);
+      }
 
-    // Create existing/placeholder posts
-    const existingPosts = [
-      {
-        id: generateId(),
-        username: 'user1',
-        content: 'A stranger complimented my outfit :)',
-        hearts: 3,
-        isHeartedByCurrentUser: false,
-      },
-      {
-        id: generateId(),
-        username: 'user2',
-        content: 'Got an A on my Stats Exam (phew)',
-        hearts: 2,
-        isHeartedByCurrentUser: false,
-      },
-    ];
 
-    if (userPost) {
-      setPosts([userPost, ...existingPosts]);
-    } else {
-      setPosts([...existingPosts]);
+      // Create existing/placeholder posts
+      const existingPosts = [
+        {
+          id: generateId(),
+          username: 'user1',
+          content: 'A stranger complimented my outfit :)',
+          hearts: 2,
+          isHeartedByCurrentUser: false,
+        },
+        {
+          id: generateId(),
+          username: 'user2',
+          content: 'Got an A on my Stats Exam (phew)',
+          hearts: 1,
+          isHeartedByCurrentUser: false,
+        },
+      ];
+
+      let combinedPosts = userPost ? [userPost, ...existingPosts] : [...existingPosts];
+      localStorage.setItem('posts', JSON.stringify(combinedPosts));
+
+      setPosts(combinedPosts);
     }
 
     // Start interval to generate new posts
     const intervalId = setInterval(() => {
       const newPost = generateNewPost();
-      setPosts((prevPosts) => [...prevPosts, newPost]);
-    }, 10000);
+      // setPosts((prevPosts) => [...prevPosts, newPost]);
+      setPosts((prevPosts) => {
+        const updatedPosts = [...prevPosts, newPost];
+        localStorage.setItem('posts', JSON.stringify(updatedPosts));
+        return updatedPosts;
+      })
+    }, 100000);
 
     return () => clearInterval(intervalId);
   }, [props.userName]);
@@ -145,7 +173,6 @@ export function Feed(props) {
       {/* Feed */}
       <div className="container my-4">
         <div className="row row-cols-1 row-cols-md-3 g-4">
-
           {posts.map((post) => (
             <div className="col" key={post.id}>
               <PostCard
@@ -154,9 +181,9 @@ export function Feed(props) {
               />
             </div>
           ))}
-
         </div>
       </div>
+
     </main>
   );
 }

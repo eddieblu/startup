@@ -48,6 +48,7 @@ export function Post(props) {
     const today = new Date().toDateString();
 
     localStorage.setItem('latestPost', postContent);
+    
     if (!hasPostedToday) {
       updateStreak();
       setHasPostedToday(true);
