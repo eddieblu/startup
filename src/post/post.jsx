@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
+import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import './post.css';
 
@@ -8,6 +9,11 @@ export function Post(props) {
   const [postContent, setPostContent] = React.useState('');
   const [streak, setStreak] = React.useState(0);
   const [hasPostedToday, setHasPostedToday] = React.useState(false);
+
+  // Generate unique id
+  function generateId() {
+    return uuidv4();
+  }
 
   const navigate = useNavigate();
 
@@ -25,13 +31,11 @@ export function Post(props) {
       setPostContent(storedLatestPost);
       setHasPostedToday(true);
     }
-
   }, []);
 
   function updateStreak() {
     const today = new Date().toDateString();
     const storedLastPostDate = localStorage.getItem('lastPostDate');
-
 
     if (!storedLastPostDate || storedLastPostDate !== today) {
       setStreak(prev => {
@@ -45,8 +49,8 @@ export function Post(props) {
 
   function handlePostSubmit(e) {
     e.preventDefault();
-    const today = new Date().toDateString();
 
+    const today = new Date().toDateString();
     localStorage.setItem('latestPost', postContent);
     
     if (!hasPostedToday) {
@@ -56,6 +60,33 @@ export function Post(props) {
       localStorage.setItem('lastPostDate', today);
     }
 
+
+    // Load existing posts array from localStorage
+    let parsedPosts = [];
+    const stored = localStorage.getItem('posts');
+    if (stored) {
+      parsedPosts = JSON.parse(stored);
+    }
+    
+    const firstPost = parsedPosts[0];
+    if (firstPost && firstPost.username === props.userName) {
+      parsedPosts[0] = {
+        ...parsedPosts[0],
+        content: postContent,
+      };
+    } else {
+      const userPost = {
+        id: generateId(),
+        username: props.userName,
+        content: postContent,
+        hearts: 0,
+        isHeartedByCurrentUser: false,
+      };
+      parsedPosts.unshift(userPost);
+    }
+
+    localStorage.setItem('posts', JSON.stringify(parsedPosts));
+    
     navigate('/feed');
   }
 
