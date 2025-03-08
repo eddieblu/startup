@@ -37,6 +37,7 @@ export function Post(props) {
     const today = new Date().toDateString();
     const storedLastPostDate = localStorage.getItem('lastPostDate');
 
+    // TODO: potential feature is setting streak to 0 if missed a day of posting
     if (!storedLastPostDate || storedLastPostDate !== today) {
       setStreak(prev => {
         const newStreak = prev + 1;

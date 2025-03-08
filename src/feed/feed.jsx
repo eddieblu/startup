@@ -74,7 +74,6 @@ export function Feed(props) {
     });
   }
 
-
   React.useEffect(() => {
     // Load the streak
     const storedStreak = localStorage.getItem('streak');
@@ -90,47 +89,7 @@ export function Feed(props) {
 
       const storedUserPost = parsedPosts.find(p => p.username === props.userName);
       setUserHasPosted(!!storedUserPost);
-    } else {
-      // Create userPost from localStorage if latestPost exists
-      let userPost = null;
-      const storedLatestPost = localStorage.getItem('latestPost');
-      if (storedLatestPost) {
-        setUserHasPosted(true);
-        userPost = {
-          id: generateId(),
-          username: props.userName,
-          content: storedLatestPost,
-          hearts: 0,
-          isHeartedByCurrentUser: false,
-        };
-      } else {
-        setUserHasPosted(false);
-      }
-
-
-      // Create existing/placeholder posts
-      const existingPosts = [
-        {
-          id: generateId(),
-          username: 'user1',
-          content: 'A stranger complimented my outfit :)',
-          hearts: 2,
-          isHeartedByCurrentUser: false,
-        },
-        {
-          id: generateId(),
-          username: 'user2',
-          content: 'Got an A on my Stats Exam (phew)',
-          hearts: 1,
-          isHeartedByCurrentUser: false,
-        },
-      ];
-
-      let combinedPosts = userPost ? [userPost, ...existingPosts] : [...existingPosts];
-      localStorage.setItem('posts', JSON.stringify(combinedPosts));
-
-      setPosts(combinedPosts);
-    }
+    } 
 
     // Start interval to generate new posts
     const intervalId = setInterval(() => {
@@ -141,7 +100,7 @@ export function Feed(props) {
         localStorage.setItem('posts', JSON.stringify(updatedPosts));
         return updatedPosts;
       })
-    }, 100000);
+    }, 10000);
 
     return () => clearInterval(intervalId);
   }, [props.userName]);
