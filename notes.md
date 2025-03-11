@@ -128,7 +128,9 @@ You can pass around objects between classes in .jsx files using props or another
 
 ## Public API Notes
 
-I am using the free version of Zen Quotes API. They put restrictions on what I can use. One of them is rather common, it's to do with CORS (Cross-Origin Resource Sharing) and means that I cannot call the API unless the server includes an `Access-Control-Allow-Origin` response header. There are a couple of fixes / work arounds. The most common, and the one I will attempt to use, is to have a server-side proxy. Instead of calling the ZenQuotes API directly from the browser, I'll make a request from my server (which is not subject to the browser’s same-origin policy) and then return the response to the frontend.
+I am using the free version of Zen Quotes API. They put restrictions on what I can use. One of them is rather common, it's to do with CORS (Cross-Origin Resource Sharing) and means that I cannot call the API unless the server includes an `Access-Control-Allow-Origin` response header. 
+
+There are a couple of fixes / work arounds. The most common, and the one I will attempt to use, is to have a server-side proxy. Instead of calling the ZenQuotes API directly from the browser, I'll make a request from my server (which is not subject to the browser’s same-origin policy) and then return the response to the frontend.
 
 ```js
 // On your server (Node example):
