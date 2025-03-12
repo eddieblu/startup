@@ -126,6 +126,25 @@ The Array object has several interesting static functions associated with it. He
 
 You can pass around objects between classes in .jsx files using props or another variable name and access the whole object if you need it all, or you can pass in specific items of the object. I will rewrite this later when I understand it at a deeper level, but I want to keep note of it for now :)
 
-## HTML Notes
+## Public API Notes
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+I am using the free version of Zen Quotes API. They put restrictions on what I can use. One of them is rather common, it's to do with CORS (Cross-Origin Resource Sharing) and means that I cannot call the API unless the server includes an `Access-Control-Allow-Origin` response header. 
+
+There are a couple of fixes / work arounds. The most common, and the one I will attempt to use, is to have a server-side proxy. Instead of calling the ZenQuotes API directly from the browser, I'll make a request from my server (which is not subject to the browser’s same-origin policy) and then return the response to the frontend.
+
+```js
+// On your server (Node example):
+app.get('/api/myZenQuote', async (req, res) => {
+  const response = await fetch('https://zenquotes.io/api/random');
+  const data = await response.json();
+  res.json(data);
+});
+
+// In your client code:
+fetch('/api/myZenQuote')
+  .then((r) => r.json())
+  .then((data) => {
+    // use data
+  });
+
+```
