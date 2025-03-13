@@ -8,58 +8,29 @@ export function Unauthenticated(props) {
     const [password, setPassword] = React.useState('');
     const [displayError, setDisplayError] = React.useState(null);
 
-    function getUsers() {
-        let stored = localStorage.getItem('users');
-        if (!stored) {
-            // If no "users" key, means no users are stored --> create an empty array
-            return [];
-        }
-        return JSON.parse(stored);
-    }
-
-    function saveUsers(usersArray) {
-        localStorage.setItem('users', JSON.stringify(usersArray));
-    }
-
     async function loginUser() {
-        const users = getUsers();
-
-        const foundUser = users.find((u) => u.username === userName);
-        if (!foundUser) {
-            setDisplayError('Invalid username or password');
-            return;
-        }
-
-        if (foundUser.password !== password) {
-            setDisplayError('Invalid username or password');
-            return;
-        }
-
-        localStorage.setItem('userName', userName);
-
-        props.onLogin(userName);
+        loginOrRegister(`/api/auth/login`);
     }
 
     async function createUser() {
-        const users = getUsers();
+        loginOrRegister(`/api/auth/register`);
+    }
 
-        const existingUser = users.find((u) => u.username === userName);
-        if (existingUser) {
-            setDisplayError('Username already exists. Please pick a new one.');
-            return;
+    async function loginOrRegister(endpoint) {
+        const response = await fetch(endpoint, {
+            method: 'post',
+            body: JSON.stringify({ username: userName, password: password }),
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        });
+        if (response?.status === 200) {
+            localStorage.setItem('userName', userName);
+            props.onLogin(userName);
+        } else {
+            const body = await response.json();
+            setDisplayError(`⚠ Error: ${body.msg}`);
         }
-
-        const newUser = {
-            username: userName,
-            password: password,
-        };
-        users.push(newUser);
-
-        saveUsers(users);
-
-        localStorage.setItem('userName', userName);
-
-        props.onLogin(userName);
     }
 
     return (
