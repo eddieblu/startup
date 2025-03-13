@@ -61,7 +61,6 @@ export function Post(props) {
       localStorage.setItem('lastPostDate', today);
     }
 
-
     // Load existing posts array from localStorage
     let parsedPosts = [];
     const stored = localStorage.getItem('posts');

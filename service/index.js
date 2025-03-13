@@ -28,7 +28,7 @@ app.use(express.static('public'));
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
-// CreateAuth register a new user
+// POST /api/auth/register -- Register a new user
 apiRouter.post('/auth/register', async (req, res) => {
     if (await findUser('username', req.body.username)) {
         res.status(409).send({ msg: 'Username already exists' });
@@ -40,7 +40,7 @@ apiRouter.post('/auth/register', async (req, res) => {
     }
 });
 
-// GetAuth login an existing user
+// POST /api/auth/login -- Login an existing user
 apiRouter.post('/auth/login', async (req, res) => {
     const user = await findUser('username', req.body.username);
     if (user) {
@@ -54,7 +54,7 @@ apiRouter.post('/auth/login', async (req, res) => {
     res.status(401).send({ msg: 'Invalid username or password' });
 });
 
-// DeleteAuth logout a user
+// DELETE /api/auth/logout -- Logout a user
 apiRouter.delete('/auth/logout', async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
     if (user) {
@@ -74,13 +74,23 @@ const verifyAuth = async (req, res, next) => {
     }
 };
 
-// CreatePost
-apiRouter.post('/post', verifyAuth, (_req, res) => {
+// POST /api/posts -- Create a post and add to posts
+apiRouter.post('/posts', verifyAuth, (_req, res) => {
     return res.status(501).json({ error: 'Not implemented yet' });
 });
 
-// GetFeed
-apiRouter.get('/feed', verifyAuth, (_req, res) => {
+// GET /api/posts -- Get all posts (feed)
+apiRouter.get('/posts', verifyAuth, (_req, res) => {
+    return res.status(501).json({ error: 'Not implemented yet' });
+})
+
+// GET /api/posts/:id -- Get a specific post by ID
+apiRouter.get('/posts/:id', verifyAuth, (_req, res) => {
+    return res.status(501).json({ error: 'Not implemented yet' });
+});
+
+// PATCH /api/posts/:id -- Update a post's content or hearts
+apiRouter.patch('/posts/:id', verifyAuth, (_req,res) => {
     return res.status(501).json({ error: 'Not implemented yet' });
 });
 
