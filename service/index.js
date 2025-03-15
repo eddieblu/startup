@@ -75,32 +75,101 @@ const verifyAuth = async (req, res, next) => {
 };
 
 // POST /api/posts -- Create a post and add to posts
-apiRouter.post('/posts', verifyAuth, (_req, res) => {
-    return res.status(501).json({ error: 'Not implemented yet' });
+apiRouter.post('/posts', verifyAuth, async (req, res) => {
+    try {
+        const user = await findUser('token', req.cookies[authCookieName]);
+        
+        // Increment streak
+        user.streak += 1;
+
+        // Create new post
+        const newPost = {
+            id: uuid.v4(),
+            username: user.username,
+            content: req.body.content || '',
+            hearts: 0,
+            isHeartedByCurrentUser: false,
+            heartedBy: [],
+        };
+
+        posts.push(newPost);
+
+        return res.status(201).json(newPost);
+    } catch (err) {
+        return res.status(500).json({ error: err.message });
+    }
 });
 
 // GET /api/posts -- Get all posts (feed)
-apiRouter.get('/posts', verifyAuth, (_req, res) => {
+apiRouter.get('/posts', verifyAuth, (req, res) => {
     return res.status(501).json({ error: 'Not implemented yet' });
 })
 
 // GET /api/posts/:id -- Get a specific post by ID
-apiRouter.get('/posts/:id', verifyAuth, (_req, res) => {
+apiRouter.get('/posts/:id', verifyAuth, (req, res) => {
     return res.status(501).json({ error: 'Not implemented yet' });
 });
 
-// PATCH /api/posts/:id -- Update a post's content or hearts
-apiRouter.patch('/posts/:id', verifyAuth, (_req,res) => {
-    return res.status(501).json({ error: 'Not implemented yet' });
+// PATCH /api/posts/:id/content -- Update a post's content
+apiRouter.patch('/posts/:id/content', verifyAuth, async (req, res) => {
+    try {
+        const user = await findUser('token', req.cookies[authCookieName]);
+
+        const post = posts.find((p) => p.id === req.params.id);
+        if (!post) {
+            return res.status(404).json({ msg: 'Post not found' });
+        }
+
+        if (req.body.content !== undefined) {
+            if (post.username !== user.username) {
+                return res.status(403).json({ msg: 'Forbidden: not the post owner' });
+            }
+            post.content = req.body.content;
+        }
+
+        return res.json(post);
+    } catch (err) {
+        return res.status(500).json({ msg: err.message });
+    }
+});
+
+// PATCH /api/posts/:id/heart
+apiRouter.patch('/posts/:id/heart', verifyAuth, async (req, res) => {
+    try {
+        const user = await findUser('token', req.cookies[authCookieName]);
+
+        const post = posts.find((p) => p.id === req.params.id);
+        if (!post) {
+            return res.status(404).json({ msg: 'Post not found' });
+        }
+
+        const index = post.heartedBy.indexOf(user.username);
+        if (index >= 0) {
+            post.heartedBy.splice(index, 1);
+            post.hearts -= 1;
+        } else {
+            post.heartedBy.push(user.username);
+            post.hearts += 1;
+        }
+
+        const updatedPost = {
+            ...post,
+            isHeartedByCurrentUser: post.heartedBy.includes(user.username),
+        }
+
+        return res.json(updatedPost);
+    } catch (err) {
+        return res.status(500).json({ msg: err.message });
+    }
 });
 
 // Default error handler
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res, _next) {
     res.status(500).send({ type: err.name, message: err.message });
 });
 
 // Return the application's default page if the path is unknown
-app.use((_req, res) => {
+app.use((req, res) => {
     res.sendFile('index.html', { root: 'public' });
 });
 
@@ -119,6 +188,7 @@ async function registerUser(username, password) {
         username: username,
         password: passwordHash,
         token: uuid.v4(),
+        streak: 0,
     };
     users.push(user);
 

@@ -23,6 +23,10 @@ export function Post(props) {
       setStreak(parseInt(storedStreak));
     }
 
+    // TODO: I think instead of storing latestPost, make a fetch from service to retrieve user's 
+    // post, and load that, else load empty 
+    // GET /api/posts/:id
+
     const today = new Date().toDateString();
     const storedLastPostDate = localStorage.getItem('lastPostDate');
     const storedLatestPost = localStorage.getItem('latestPost');
