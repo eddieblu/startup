@@ -11,20 +11,12 @@ const authCookieName = 'token';
 let users = [];
 let posts = [];
 
-// The service port. 
-// In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
-// JSON body parsing using built-in middleware
 app.use(express.json());
-
-// Use the cookie parser middleware for tracking authentication tokens
 app.use(cookieParser());
-
-// Serve up the front-end static content hosting
 app.use(express.static('public'));
 
-// Router for service endpoints
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
@@ -78,9 +70,10 @@ const verifyAuth = async (req, res, next) => {
 apiRouter.post('/posts', verifyAuth, async (req, res) => {
     try {
         const user = await findUser('token', req.cookies[authCookieName]);
-        
+
         // Increment streak
         user.streak += 1;
+        console.log(user.streak);
 
         // Create new post
         const newPost = {
@@ -108,6 +101,28 @@ apiRouter.get('/posts', verifyAuth, (req, res) => {
 // GET /api/posts/:id -- Get a specific post by ID
 apiRouter.get('/posts/:id', verifyAuth, (req, res) => {
     return res.status(501).json({ error: 'Not implemented yet' });
+});
+
+// GET /api/posts/user/:username == Get a specific post by username, with user's streak included
+apiRouter.get('/posts/user/:username', verifyAuth, async (req, res) => {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    const userPost = posts.find((p) => p.username === req.params.username);
+    
+    if (!userPost) {
+        return res.json({
+            id: null,
+            content: '',
+            hearts: 0,
+            isHeartedByCurrentUser: false,
+            heartedBy: [],
+            streak: user.streak
+        });
+    }
+    const postAndStreak = {
+        ...userPost,
+        streak: user.streak,
+    }
+    return res.json(postAndStreak);
 });
 
 // PATCH /api/posts/:id/content -- Update a post's content

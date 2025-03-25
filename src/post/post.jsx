@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import './post.css';
 
@@ -9,89 +9,83 @@ export function Post(props) {
   const [postContent, setPostContent] = React.useState('');
   const [streak, setStreak] = React.useState(0);
   const [hasPostedToday, setHasPostedToday] = React.useState(false);
-
-  // Generate unique id
-  function generateId() {
-    return uuidv4();
-  }
+  const [postId, setPostId] = React.useState(null);
 
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    const storedStreak = localStorage.getItem('streak');
-    if (storedStreak) {
-      setStreak(parseInt(storedStreak));
-    }
+    fetch(`/api/posts/user/${props.userName}`, {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.id) {
+          setStreak(data.streak);
+          setPostContent(data.content);
+          setHasPostedToday(true);
+          setPostId(data.id);
+        } else {
+          setStreak(data ? data.streak : 0);
+          setPostContent('');
+          setHasPostedToday(false);
+          setPostId(null);
+        }
+      })
+      .catch((err => {
+        console.error('Error fetching post:', err);
+      }));
 
-    // TODO: I think instead of storing latestPost, make a fetch from service to retrieve user's 
-    // post, and load that, else load empty 
-    // GET /api/posts/:id
-
-    const today = new Date().toDateString();
-    const storedLastPostDate = localStorage.getItem('lastPostDate');
-    const storedLatestPost = localStorage.getItem('latestPost');
-
-    if (storedLastPostDate === today && storedLatestPost) {
-      setPostContent(storedLatestPost);
-      setHasPostedToday(true);
-    }
-  }, []);
-
-  function updateStreak() {
-    const today = new Date().toDateString();
-    const storedLastPostDate = localStorage.getItem('lastPostDate');
-
-    // TODO: potential feature is setting streak to 0 if missed a day of posting
-    if (!storedLastPostDate || storedLastPostDate !== today) {
-      setStreak(prev => {
-        const newStreak = prev + 1;
-        localStorage.setItem('streak', newStreak);
-        return newStreak;
-      });
-      localStorage.setItem('lastPostDate', today);
-    }
-  }
+  }, [props.userName]);
 
   function handlePostSubmit(e) {
     e.preventDefault();
 
-    const today = new Date().toDateString();
-    localStorage.setItem('latestPost', postContent);
-    
-    if (!hasPostedToday) {
-      updateStreak();
-      setHasPostedToday(true);
+    if (hasPostedToday && postId) {
+      // patch
+      fetch(`/api/posts/${postId}/content`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ content: postContent })
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`Server error: ${res.status}`);
+          }
+          return res.json();
+        })
+        .then((updatedPost) => {
+          console.log('Updated post:', updatedPost);
+          navigate('/feed');
+        })
+        .catch((err) => {
+          console.error('Error updating post:', err);
+        });
     } else {
-      localStorage.setItem('lastPostDate', today);
+      //post
+      fetch(`/api/posts`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ content: postContent })
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`Server error: ${res.status}`);
+          }
+          return res.json();
+        })
+        .then((createdPost) => {
+          console.log('New post created:', createdPost);
+          navigate('/feed');
+        })
+        .catch((err) => {
+          console.error('Error creating post:', err);
+        });
     }
 
-    // Load existing posts array from localStorage
-    let parsedPosts = [];
-    const stored = localStorage.getItem('posts');
-    if (stored) {
-      parsedPosts = JSON.parse(stored);
-    }
-    
-    const firstPost = parsedPosts[0];
-    if (firstPost && firstPost.username === props.userName) {
-      parsedPosts[0] = {
-        ...parsedPosts[0],
-        content: postContent,
-      };
-    } else {
-      const userPost = {
-        id: generateId(),
-        username: props.userName,
-        content: postContent,
-        hearts: 0,
-        isHeartedByCurrentUser: false,
-      };
-      parsedPosts.unshift(userPost);
-    }
-
-    localStorage.setItem('posts', JSON.stringify(parsedPosts));
-    
-    navigate('/feed');
   }
 
   return (
