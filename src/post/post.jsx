@@ -1,7 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
-// import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 import './post.css';
 

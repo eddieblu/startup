@@ -95,15 +95,15 @@ apiRouter.post('/posts', verifyAuth, async (req, res) => {
 
 // GET /api/posts -- Get all posts (feed)
 apiRouter.get('/posts', verifyAuth, (req, res) => {
-    return res.status(501).json({ error: 'Not implemented yet' });
-})
+    return res.json(posts);
+});
 
 // GET /api/posts/:id -- Get a specific post by ID
 apiRouter.get('/posts/:id', verifyAuth, (req, res) => {
     return res.status(501).json({ error: 'Not implemented yet' });
 });
 
-// GET /api/posts/user/:username == Get a specific post by username, with user's streak included
+// GET /api/posts/user/:username -- Get a specific post by username, with user's streak included
 apiRouter.get('/posts/user/:username', verifyAuth, async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
     const userPost = posts.find((p) => p.username === req.params.username);
@@ -133,14 +133,14 @@ apiRouter.patch('/posts/:id/content', verifyAuth, async (req, res) => {
         const post = posts.find((p) => p.id === req.params.id);
         if (!post) {
             return res.status(404).json({ msg: 'Post not found' });
-        }
+        };
 
         if (req.body.content !== undefined) {
             if (post.username !== user.username) {
                 return res.status(403).json({ msg: 'Forbidden: not the post owner' });
             }
             post.content = req.body.content;
-        }
+        };
 
         return res.json(post);
     } catch (err) {

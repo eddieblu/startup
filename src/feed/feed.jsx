@@ -75,21 +75,47 @@ export function Feed(props) {
   }
 
   React.useEffect(() => {
-    // Load the streak
-    const storedStreak = localStorage.getItem('streak');
-    if (storedStreak) {
-      setStreak(parseInt(storedStreak, 10));
-    }
 
-    // Check for and load existing posts
-    const storedPosts = localStorage.getItem('posts');
-    if (storedPosts) {
-      const parsedPosts = JSON.parse(storedPosts);
-      setPosts(parsedPosts);
+    fetch(`/api/posts/user/${props.userName}`, {
+      method: 'GET',
+      credentials: 'include'
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.id) {
+          setUserHasPosted(true);
+          setStreak(data.streak);
 
-      const storedUserPost = parsedPosts.find(p => p.username === props.userName);
-      setUserHasPosted(!!storedUserPost);
-    } 
+          fetch('/api/posts', {
+            method: 'GET',
+            credentials: 'include'
+          })
+            .then((res) => res.json())
+            .then((allPosts) => {
+              setPosts(allPosts);
+            })
+            .catch(err => console.error('Error fetching all posts:', err));
+        } else {
+          setStreak(data ? data.streak : 0);
+          setUserHasPosted(false);
+        }
+      })
+
+    // // Load the streak
+    // const storedStreak = localStorage.getItem('streak');
+    // if (storedStreak) {
+    //   setStreak(parseInt(storedStreak, 10));
+    // }
+
+    // // Check for and load existing posts
+    // const storedPosts = localStorage.getItem('posts');
+    // if (storedPosts) {
+    //   const parsedPosts = JSON.parse(storedPosts);
+    //   setPosts(parsedPosts);
+
+    //   const storedUserPost = parsedPosts.find(p => p.username === props.userName);
+    //   setUserHasPosted(!!storedUserPost);
+    // }
 
     // Start interval to generate new posts
     const intervalId = setInterval(() => {
@@ -100,7 +126,7 @@ export function Feed(props) {
         localStorage.setItem('posts', JSON.stringify(updatedPosts));
         return updatedPosts;
       })
-    }, 10000);
+    }, 100000);
 
     return () => clearInterval(intervalId);
   }, [props.userName]);
@@ -113,7 +139,7 @@ export function Feed(props) {
         <p>Post your sunshine before accessing the feed!</p>
       </main>
     )
-  }
+  };
 
   return (
     <main className="body container-fluid text-center">
