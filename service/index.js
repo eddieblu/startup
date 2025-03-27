@@ -81,7 +81,6 @@ apiRouter.post('/posts', verifyAuth, async (req, res) => {
             username: user.username,
             content: req.body.content || '',
             hearts: 0,
-            isHeartedByCurrentUser: false,
             heartedBy: [],
         };
 
@@ -94,8 +93,15 @@ apiRouter.post('/posts', verifyAuth, async (req, res) => {
 });
 
 // GET /api/posts -- Get all posts (feed)
-apiRouter.get('/posts', verifyAuth, (req, res) => {
-    return res.json(posts);
+apiRouter.get('/posts', verifyAuth, async (req, res) => {
+    const user = await findUser('token', req.cookies[authCookieName]);
+    const postsHearted = posts.map((post) => {
+        return {
+            ...post,
+            isHeartedByCurrentUser: post.heartedBy.includes(user.username),
+        };
+    });
+    return res.json(postsHearted);
 });
 
 // GET /api/posts/:id -- Get a specific post by ID
@@ -107,19 +113,20 @@ apiRouter.get('/posts/:id', verifyAuth, (req, res) => {
 apiRouter.get('/posts/user/:username', verifyAuth, async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
     const userPost = posts.find((p) => p.username === req.params.username);
-    
+
     if (!userPost) {
         return res.json({
             id: null,
             content: '',
             hearts: 0,
-            isHeartedByCurrentUser: false,
             heartedBy: [],
+            isHeartedByCurrentUser: false,
             streak: user.streak
         });
     }
     const postAndStreak = {
         ...userPost,
+        isHeartedByCurrentUser: userPost.heartedBy.includes(user.username),
         streak: user.streak,
     }
     return res.json(postAndStreak);
@@ -167,12 +174,10 @@ apiRouter.patch('/posts/:id/heart', verifyAuth, async (req, res) => {
             post.hearts += 1;
         }
 
-        const updatedPost = {
+        return res.json({
             ...post,
             isHeartedByCurrentUser: post.heartedBy.includes(user.username),
-        }
-
-        return res.json(updatedPost);
+        });
     } catch (err) {
         return res.status(500).json({ msg: err.message });
     }

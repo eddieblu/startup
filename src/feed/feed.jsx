@@ -129,74 +129,58 @@ export function Feed(props) {
       });
   }
 
-  // // Load the streak
-  // const storedStreak = localStorage.getItem('streak');
-  // if (storedStreak) {
-  //   setStreak(parseInt(storedStreak, 10));
-  // }
-
-  // // Check for and load existing posts
-  // const storedPosts = localStorage.getItem('posts');
-  // if (storedPosts) {
-  //   const parsedPosts = JSON.parse(storedPosts);
-  //   setPosts(parsedPosts);
-
-  //   const storedUserPost = parsedPosts.find(p => p.username === props.userName);
-  //   setUserHasPosted(!!storedUserPost);
-  // }
-
   // Start interval to generate new posts
-//   const intervalId = setInterval(() => {
-//     const newPost = generateNewPost();
-//     // setPosts((prevPosts) => [...prevPosts, newPost]);
-//     setPosts((prevPosts) => {
-//       const updatedPosts = [...prevPosts, newPost];
-//       localStorage.setItem('posts', JSON.stringify(updatedPosts));
-//       return updatedPosts;
-//     })
-//   }, 100000);
+  //   const intervalId = setInterval(() => {
+  //     const newPost = generateNewPost();
+  //     // setPosts((prevPosts) => [...prevPosts, newPost]);
+  //     setPosts((prevPosts) => {
+  //       const updatedPosts = [...prevPosts, newPost];
+  //       localStorage.setItem('posts', JSON.stringify(updatedPosts));
+  //       return updatedPosts;
+  //     })
+  //   }, 100000);
 
-//   return () => clearInterval(intervalId);
-// }, [props.userName]);
+  //   return () => clearInterval(intervalId);
+  // }, [props.userName]);
 
-// Gate: if user has not posted, show message
-if (!userHasPosted) {
+  // Gate: if user has not posted, show message
+  if (!userHasPosted) {
+    return (
+      <main className="body container-fluid text-center">
+        <h1>Sunlight Feed</h1>
+        <p>Post your sunshine before accessing the feed!</p>
+      </main>
+    )
+  };
+
   return (
     <main className="body container-fluid text-center">
       <h1>Sunlight Feed</h1>
-      <p>Post your sunshine before accessing the feed!</p>
+      <p className="label">Thanks for sharing. You just made someone's day brighter!</p>
+
+      {/* Streak + user info row */}
+      <div className="header-row">
+        <p className="user-info">User: @{props.userName}</p>
+        <div id="streak-counter">
+          <FontAwesomeIcon icon={faSun} className="icon-gap" style={{ color: 'rgb(255, 208, 0)' }} />
+          <span id="streak-count">{streak}</span> day streak
+        </div>
+      </div>
+
+      {/* Feed */}
+      <div className="container my-4">
+        <div className="row row-cols-1 row-cols-md-3 g-4">
+          {posts.map((post) => (
+            <div className="col" key={post.id}>
+              <PostCard
+                post={post}
+                onToggleHeart={(postId) => toggleIsHearted(postId)}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
     </main>
-  )
-};
-
-return (
-  <main className="body container-fluid text-center">
-    <h1>Sunlight Feed</h1>
-    <p className="label">Thanks for sharing. You just made someone's day brighter!</p>
-
-    {/* Streak + user info row */}
-    <div className="header-row">
-      <p className="user-info">User: @{props.userName}</p>
-      <div id="streak-counter">
-        <FontAwesomeIcon icon={faSun} className="icon-gap" style={{ color: 'rgb(255, 208, 0)' }} />
-        <span id="streak-count">{streak}</span> day streak
-      </div>
-    </div>
-
-    {/* Feed */}
-    <div className="container my-4">
-      <div className="row row-cols-1 row-cols-md-3 g-4">
-        {posts.map((post) => (
-          <div className="col" key={post.id}>
-            <PostCard
-              post={post}
-              onToggleHeart={(postId) => toggleIsHearted(postId)}
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-
-  </main>
-);
+  );
 }
