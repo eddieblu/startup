@@ -9,8 +9,18 @@ export function Login({ userName, authState, onAuthChange }) {
     const [quoteAuthor, setQuoteAuthor] = React.useState('unknown');
 
     React.useEffect(() => {
-        setQuote('“Treat everyone with politeness and kindness, not because they are nice, but because you are.”');
-        setQuoteAuthor('Roy T. Bennett');
+        fetch('https://api.quotable.io/random')
+            .then((response) => response.json())
+            .then((data) => {
+                setQuote(data.content);
+                setQuoteAuthor(data.author);
+            })
+            .catch((error) => {
+                console.error('Error fetching quote:', error);
+                // Optionally set fallback quote if fetch fails
+                setQuote('Oops! Something went wrong.');
+                setQuoteAuthor('Unknown');
+            });
     }, []);
 
     return (
