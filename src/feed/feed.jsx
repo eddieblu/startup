@@ -1,3 +1,6 @@
+// still not sure though if user's post will show first when getting posts
+// still not sure if I need to make app reset (so there's no unauthorized bug when re-running)
+
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
@@ -46,33 +49,33 @@ export function Feed(props) {
   }
 
   // Update hearts if post is hearted 
-  function toggleIsHearted(postId) {
-    setPosts((prevPosts) => {
-      const updatedPosts = prevPosts.map((p) => {
-        if (p.id == postId) {
-          if (p.isHeartedByCurrentUser) {
-            return {
-              ...p,
-              hearts: (p.hearts - 1),
-              isHeartedByCurrentUser: false
-            }
-          } else {
-            return {
-              ...p,
-              hearts: (p.hearts + 1),
-              isHeartedByCurrentUser: true
-            };
-          }
-        }
-        return p;
-      });
+  // function toggleIsHearted(postId) {
+  //   setPosts((prevPosts) => {
+  //     const updatedPosts = prevPosts.map((p) => {
+  //       if (p.id == postId) {
+  //         if (p.isHeartedByCurrentUser) {
+  //           return {
+  //             ...p,
+  //             hearts: (p.hearts - 1),
+  //             isHeartedByCurrentUser: false
+  //           }
+  //         } else {
+  //           return {
+  //             ...p,
+  //             hearts: (p.hearts + 1),
+  //             isHeartedByCurrentUser: true
+  //           };
+  //         }
+  //       }
+  //       return p;
+  //     });
 
-      localStorage.setItem('posts', JSON.stringify(updatedPosts));
+  //     localStorage.setItem('posts', JSON.stringify(updatedPosts));
 
-      // return to update state
-      return updatedPosts;
-    });
-  }
+  //     // return to update state
+  //     return updatedPosts;
+  //   });
+  // }
 
   React.useEffect(() => {
 
@@ -100,75 +103,100 @@ export function Feed(props) {
           setUserHasPosted(false);
         }
       })
-
-    // // Load the streak
-    // const storedStreak = localStorage.getItem('streak');
-    // if (storedStreak) {
-    //   setStreak(parseInt(storedStreak, 10));
-    // }
-
-    // // Check for and load existing posts
-    // const storedPosts = localStorage.getItem('posts');
-    // if (storedPosts) {
-    //   const parsedPosts = JSON.parse(storedPosts);
-    //   setPosts(parsedPosts);
-
-    //   const storedUserPost = parsedPosts.find(p => p.username === props.userName);
-    //   setUserHasPosted(!!storedUserPost);
-    // }
-
-    // Start interval to generate new posts
-    const intervalId = setInterval(() => {
-      const newPost = generateNewPost();
-      // setPosts((prevPosts) => [...prevPosts, newPost]);
-      setPosts((prevPosts) => {
-        const updatedPosts = [...prevPosts, newPost];
-        localStorage.setItem('posts', JSON.stringify(updatedPosts));
-        return updatedPosts;
-      })
-    }, 100000);
-
-    return () => clearInterval(intervalId);
+      .catch((err) => {
+        console.error('Error checking user post:', err);
+      });
   }, [props.userName]);
 
-  // Gate: if user has not posted, show message
-  if (!userHasPosted) {
-    return (
-      <main className="body container-fluid text-center">
-        <h1>Sunlight Feed</h1>
-        <p>Post your sunshine before accessing the feed!</p>
-      </main>
-    )
-  };
+  function toggleIsHearted(postId) {
+    fetch(`/api/posts/${postId}/heart`, {
+      method: 'PATCH',
+      credentials: 'include'
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Failed to toggle heart. Status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((updatedPost) => {
+        setPosts((prevPosts) => {
+          return prevPosts.map((p) => (p.id === updatedPost.id ? updatedPost : p));
+        });
+      })
+      .catch((err) => {
+        console.error('Error toggling heart:', err);
+      });
+  }
 
+  // // Load the streak
+  // const storedStreak = localStorage.getItem('streak');
+  // if (storedStreak) {
+  //   setStreak(parseInt(storedStreak, 10));
+  // }
+
+  // // Check for and load existing posts
+  // const storedPosts = localStorage.getItem('posts');
+  // if (storedPosts) {
+  //   const parsedPosts = JSON.parse(storedPosts);
+  //   setPosts(parsedPosts);
+
+  //   const storedUserPost = parsedPosts.find(p => p.username === props.userName);
+  //   setUserHasPosted(!!storedUserPost);
+  // }
+
+  // Start interval to generate new posts
+//   const intervalId = setInterval(() => {
+//     const newPost = generateNewPost();
+//     // setPosts((prevPosts) => [...prevPosts, newPost]);
+//     setPosts((prevPosts) => {
+//       const updatedPosts = [...prevPosts, newPost];
+//       localStorage.setItem('posts', JSON.stringify(updatedPosts));
+//       return updatedPosts;
+//     })
+//   }, 100000);
+
+//   return () => clearInterval(intervalId);
+// }, [props.userName]);
+
+// Gate: if user has not posted, show message
+if (!userHasPosted) {
   return (
     <main className="body container-fluid text-center">
       <h1>Sunlight Feed</h1>
-      <p className="label">Thanks for sharing. You just made someone's day brighter!</p>
-
-      {/* Streak + user info row */}
-      <div className="header-row">
-        <p className="user-info">User: @{props.userName}</p>
-        <div id="streak-counter">
-          <FontAwesomeIcon icon={faSun} className="icon-gap" style={{ color: 'rgb(255, 208, 0)' }} />
-          <span id="streak-count">{streak}</span> day streak
-        </div>
-      </div>
-
-      {/* Feed */}
-      <div className="container my-4">
-        <div className="row row-cols-1 row-cols-md-3 g-4">
-          {posts.map((post) => (
-            <div className="col" key={post.id}>
-              <PostCard
-                post={post}
-                onToggleHeart={toggleIsHearted}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-
+      <p>Post your sunshine before accessing the feed!</p>
     </main>
-  );
+  )
+};
+
+return (
+  <main className="body container-fluid text-center">
+    <h1>Sunlight Feed</h1>
+    <p className="label">Thanks for sharing. You just made someone's day brighter!</p>
+
+    {/* Streak + user info row */}
+    <div className="header-row">
+      <p className="user-info">User: @{props.userName}</p>
+      <div id="streak-counter">
+        <FontAwesomeIcon icon={faSun} className="icon-gap" style={{ color: 'rgb(255, 208, 0)' }} />
+        <span id="streak-count">{streak}</span> day streak
+      </div>
+    </div>
+
+    {/* Feed */}
+    <div className="container my-4">
+      <div className="row row-cols-1 row-cols-md-3 g-4">
+        {posts.map((post) => (
+          <div className="col" key={post.id}>
+            <PostCard
+              post={post}
+              onToggleHeart={(postId) => toggleIsHearted(postId)}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </main>
+);
 }
