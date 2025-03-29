@@ -96,11 +96,11 @@ For this deliverable I did the following:
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - Installed Express with NPM. Default port on 4000.js`
+- [x] **Static middleware for frontend** - Simple endpoints in service/index
+- [x] **Calls to third party endpoints** - Login/Register page calls [quote.cs260.click](https://quote.cs260.click) and renders the resulting JSON with React. I had a different API that I wanted to use but I had issues with it being unsecure. This was the previous API that did not work: [api.quotable.io](https://api.quotable.io/random)
+- [x] **Backend service endpoints** - Simple endpoints in service/index for auth, posting and viewing posts
+- [x] **Frontend calls service endpoints** - Fully support authentication and restrict access to website
 
 ## 🚀 DB/Login deliverable
 
