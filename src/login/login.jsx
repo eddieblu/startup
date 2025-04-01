@@ -9,10 +9,10 @@ export function Login({ userName, authState, onAuthChange }) {
     const [quoteAuthor, setQuoteAuthor] = React.useState('unknown');
 
     React.useEffect(() => {
-        fetch('https://api.quotable.io/random')
+        fetch('https://quote.cs260.click/')
             .then((response) => response.json())
             .then((data) => {
-                setQuote(data.content);
+                setQuote(data.quote);
                 setQuoteAuthor(data.author);
             })
             .catch((error) => {
