@@ -2,8 +2,8 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const express = require('express');
 const uuid = require('uuid');
-
 const app = express();
+const DB = require('./database.js');
 
 const authCookieName = 'token';
 
@@ -23,7 +23,7 @@ app.use(`/api`, apiRouter);
 // POST /api/auth/register -- Register a new user
 apiRouter.post('/auth/register', async (req, res) => {
     if (await findUser('username', req.body.username)) {
-        res.status(409).send({ msg: 'Username already exists' });
+        res.status(409).send({ msg: 'User exists' });
     } else {
         const user = await registerUser(req.body.username, req.body.password);
 
@@ -38,6 +38,7 @@ apiRouter.post('/auth/login', async (req, res) => {
     if (user) {
         if (await bcrypt.compare(req.body.password, user.password)) {
             user.token = uuid.v4();
+            await DB.updateUser(user);
             setAuthCookie(res, user.token);
             res.send({ username: user.username });
             return;
@@ -51,6 +52,7 @@ apiRouter.delete('/auth/logout', async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
     if (user) {
         delete user.token;
+        DB.updateUser(user);
     }
     res.clearCookie(authCookieName);
     res.status(204).end();
@@ -72,8 +74,7 @@ apiRouter.post('/posts', verifyAuth, async (req, res) => {
         const user = await findUser('token', req.cookies[authCookieName]);
 
         // Increment streak
-        user.streak += 1;
-        console.log(user.streak);
+        await DB.incrementUserStreak(user.username);
 
         // Create new post
         const newPost = {
@@ -84,7 +85,7 @@ apiRouter.post('/posts', verifyAuth, async (req, res) => {
             heartedBy: [],
         };
 
-        posts.push(newPost);
+        await DB.addPost(newPost);
 
         return res.status(201).json(newPost);
     } catch (err) {
@@ -197,7 +198,10 @@ app.use((req, res) => {
 async function findUser(field, value) {
     if (!value) return null;
 
-    return users.find((u) => u[field] === value);
+    if (field === 'token') {
+        return DB.getUserByToken(value);
+    }
+    return DB.getUser(value);
 }
 
 // Helper function
@@ -210,7 +214,7 @@ async function registerUser(username, password) {
         token: uuid.v4(),
         streak: 0,
     };
-    users.push(user);
+    await DB.addUser(user);
 
     return user;
 }

@@ -70,7 +70,7 @@ async function updatePostContent(postId, newContent) {
 }
 
 async function toggleHeart(postId, username) {
-    // If user not in heartedBy, add them:
+    // If user not in heartedBy, add them and increment heart:
     await postCollection.updateOne(
         { id: postId },
         {
@@ -78,7 +78,7 @@ async function toggleHeart(postId, username) {
             $inc: { hearts: 1 }
         }
     );
-    // If user already in heartedBy, remove them:
+    // If user already in heartedBy, remove them and decrement heart:
     await postCollection.updateOne(
         { id: postId },
         {
