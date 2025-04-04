@@ -1,6 +1,3 @@
-// still not sure though if user's post will show first when getting posts
-// still not sure if I need to make app reset (so there's no unauthorized bug when re-running)
-
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun } from '@fortawesome/free-solid-svg-icons';
