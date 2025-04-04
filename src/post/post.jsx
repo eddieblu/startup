@@ -55,7 +55,7 @@ export function Post(props) {
           return res.json();
         })
         .then((updatedPost) => {
-          console.log('Updated post:', updatedPost);
+          // console.log('Updated post:', updatedPost);
           navigate('/feed');
         })
         .catch((err) => {
@@ -77,7 +77,7 @@ export function Post(props) {
           return res.json();
         })
         .then((createdPost) => {
-          console.log('New post created:', createdPost);
+          // console.log('New post created:', createdPost);
           navigate('/feed');
         })
         .catch((err) => {
