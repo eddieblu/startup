@@ -3,7 +3,7 @@ const config = require('./dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
-const db = client.db('simon');
+const db = client.db('startup');
 const userCollection = db.collection('user');
 const postCollection = db.collection('post');
 
@@ -31,7 +31,7 @@ async function addUser(user) {
 }
 
 async function updateUser(user) {
-    await userCollection.updateOne({ email: user.email }, { $set: user });
+    await userCollection.updateOne({ username: user.username }, { $set: user });
 }
 
 async function incrementUserStreak(username) {
@@ -62,6 +62,10 @@ function getPostById(postId) {
     return postCollection.findOne({ id: postId });
 }
 
+function getPostByUsername(username) {
+    return postCollection.findOne({ username: username });
+}
+
 async function updatePostContent(postId, newContent) {
     await postCollection.updateOne(
         { id: postId },
@@ -70,22 +74,27 @@ async function updatePostContent(postId, newContent) {
 }
 
 async function toggleHeart(postId, username) {
-    // If user not in heartedBy, add them and increment heart:
-    await postCollection.updateOne(
-        { id: postId },
-        {
-            $addToSet: { heartedBy: username },
-            $inc: { hearts: 1 }
-        }
-    );
-    // If user already in heartedBy, remove them and decrement heart:
-    await postCollection.updateOne(
-        { id: postId },
-        {
-            $pull: { heartedBy: username },
-            $inc: { hearts: -1 }
-        }
-    );
+    const post = await postCollection.findOne({ id: postId });
+    if (!post) return;
+
+    const isHearted = post.heartedBy.includes(username);
+    if (!isHearted) {
+        await postCollection.updateOne(
+            { id: postId },
+            {
+                $addToSet: { heartedBy: username },
+                $inc: { hearts: 1 }
+            }
+        );
+    } else {
+        await postCollection.updateOne(
+            { id: postId, heartedBy: username },
+            {
+                $pull: { heartedBy: username },
+                $inc: { hearts: -1 }
+            }
+        );
+    }
 }
 
 module.exports = {
@@ -97,6 +106,7 @@ module.exports = {
     addPost,
     getAllPosts,
     getPostById,
+    getPostByUsername,
     updatePostContent,
     toggleHeart
 }

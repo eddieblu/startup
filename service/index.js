@@ -7,10 +7,6 @@ const DB = require('./database.js');
 
 const authCookieName = 'token';
 
-// The scores and posts are saved in memory and disappear whenever the service is restarted.
-let users = [];
-let posts = [];
-
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
 app.use(express.json());
@@ -70,32 +66,32 @@ const verifyAuth = async (req, res, next) => {
 
 // POST /api/posts -- Create a post and add to posts
 apiRouter.post('/posts', verifyAuth, async (req, res) => {
-    try {
-        const user = await findUser('token', req.cookies[authCookieName]);
+    const user = await findUser('token', req.cookies[authCookieName]);
 
-        // Increment streak
-        await DB.incrementUserStreak(user.username);
+    // Increment streak
+    await DB.incrementUserStreak(user.username);
 
-        // Create new post
-        const newPost = {
-            id: uuid.v4(),
-            username: user.username,
-            content: req.body.content || '',
-            hearts: 0,
-            heartedBy: [],
-        };
+    // Create new post
+    const newPost = {
+        id: uuid.v4(),
+        username: user.username,
+        content: req.body.content || '',
+        hearts: 0,
+        heartedBy: [],
+    };
 
-        await DB.addPost(newPost);
+    await DB.addPost(newPost);
 
-        return res.status(201).json(newPost);
-    } catch (err) {
-        return res.status(500).json({ error: err.message });
-    }
+    return res.status(201).json(newPost);
 });
 
 // GET /api/posts -- Get all posts (feed)
 apiRouter.get('/posts', verifyAuth, async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
+
+    const posts = await DB.getAllPosts(user.username);
+
+    // TODO: change this to grab from database instead (should work without manually setting w DB)
     const postsHearted = posts.map((post) => {
         return {
             ...post,
@@ -105,15 +101,10 @@ apiRouter.get('/posts', verifyAuth, async (req, res) => {
     return res.json(postsHearted);
 });
 
-// GET /api/posts/:id -- Get a specific post by ID
-apiRouter.get('/posts/:id', verifyAuth, (req, res) => {
-    return res.status(501).json({ error: 'Not implemented yet' });
-});
-
 // GET /api/posts/user/:username -- Get a specific post by username, with user's streak included
 apiRouter.get('/posts/user/:username', verifyAuth, async (req, res) => {
     const user = await findUser('token', req.cookies[authCookieName]);
-    const userPost = posts.find((p) => p.username === req.params.username);
+    const userPost = await DB.getPostByUsername(req.params.username);
 
     if (!userPost) {
         return res.json({
@@ -125,6 +116,9 @@ apiRouter.get('/posts/user/:username', verifyAuth, async (req, res) => {
             streak: user.streak
         });
     }
+
+    // TODO: is post and streak got from database that wasn't from local data ? 
+    // (same potential future fix as setting hearts in .get/posts)
     const postAndStreak = {
         ...userPost,
         isHeartedByCurrentUser: userPost.heartedBy.includes(user.username),
@@ -135,53 +129,41 @@ apiRouter.get('/posts/user/:username', verifyAuth, async (req, res) => {
 
 // PATCH /api/posts/:id/content -- Update a post's content
 apiRouter.patch('/posts/:id/content', verifyAuth, async (req, res) => {
-    try {
-        const user = await findUser('token', req.cookies[authCookieName]);
+    const user = await findUser('token', req.cookies[authCookieName]);
 
-        const post = posts.find((p) => p.id === req.params.id);
-        if (!post) {
-            return res.status(404).json({ msg: 'Post not found' });
-        };
+    const post = await DB.getPostById(req.params.id);
+    if (!post) {
+        return res.status(404).json({ msg: 'Post not found' });
+    };
 
-        if (req.body.content !== undefined) {
-            if (post.username !== user.username) {
-                return res.status(403).json({ msg: 'Forbidden: not the post owner' });
-            }
-            post.content = req.body.content;
-        };
-
-        return res.json(post);
-    } catch (err) {
-        return res.status(500).json({ msg: err.message });
+    if (post.username !== user.username) {
+        return res.status(403).json({ msg: 'Forbidden: not the post owner' });
     }
+
+    if (req.body.content !== undefined) {
+        await DB.updatePostContent(req.params.id, req.body.content);
+    };
+
+    return res.json(await DB.getPostById(req.params.id));
 });
 
 // PATCH /api/posts/:id/heart
 apiRouter.patch('/posts/:id/heart', verifyAuth, async (req, res) => {
-    try {
-        const user = await findUser('token', req.cookies[authCookieName]);
+    const user = await findUser('token', req.cookies[authCookieName]);
 
-        const post = posts.find((p) => p.id === req.params.id);
-        if (!post) {
-            return res.status(404).json({ msg: 'Post not found' });
-        }
-
-        const index = post.heartedBy.indexOf(user.username);
-        if (index >= 0) {
-            post.heartedBy.splice(index, 1);
-            post.hearts -= 1;
-        } else {
-            post.heartedBy.push(user.username);
-            post.hearts += 1;
-        }
-
-        return res.json({
-            ...post,
-            isHeartedByCurrentUser: post.heartedBy.includes(user.username),
-        });
-    } catch (err) {
-        return res.status(500).json({ msg: err.message });
+    const post = await DB.getPostById(req.params.id);
+    if (!post) {
+        return res.status(404).json({ msg: 'Post not found' });
     }
+
+    await DB.toggleHeart(req.params.id, user.username);
+
+    const updatedPost = await DB.getPostById(req.params.id);
+
+    return res.json({
+        ...updatedPost,
+        isHeartedByCurrentUser: updatedPost.heartedBy.includes(user.username),
+    });
 });
 
 // Default error handler

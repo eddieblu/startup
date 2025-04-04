@@ -48,35 +48,6 @@ export function Feed(props) {
     };
   }
 
-  // Update hearts if post is hearted 
-  // function toggleIsHearted(postId) {
-  //   setPosts((prevPosts) => {
-  //     const updatedPosts = prevPosts.map((p) => {
-  //       if (p.id == postId) {
-  //         if (p.isHeartedByCurrentUser) {
-  //           return {
-  //             ...p,
-  //             hearts: (p.hearts - 1),
-  //             isHeartedByCurrentUser: false
-  //           }
-  //         } else {
-  //           return {
-  //             ...p,
-  //             hearts: (p.hearts + 1),
-  //             isHeartedByCurrentUser: true
-  //           };
-  //         }
-  //       }
-  //       return p;
-  //     });
-
-  //     localStorage.setItem('posts', JSON.stringify(updatedPosts));
-
-  //     // return to update state
-  //     return updatedPosts;
-  //   });
-  // }
-
   React.useEffect(() => {
 
     fetch(`/api/posts/user/${props.userName}`, {
@@ -128,20 +99,6 @@ export function Feed(props) {
         console.error('Error toggling heart:', err);
       });
   }
-
-  // Start interval to generate new posts
-  //   const intervalId = setInterval(() => {
-  //     const newPost = generateNewPost();
-  //     // setPosts((prevPosts) => [...prevPosts, newPost]);
-  //     setPosts((prevPosts) => {
-  //       const updatedPosts = [...prevPosts, newPost];
-  //       localStorage.setItem('posts', JSON.stringify(updatedPosts));
-  //       return updatedPosts;
-  //     })
-  //   }, 100000);
-
-  //   return () => clearInterval(intervalId);
-  // }, [props.userName]);
 
   // Gate: if user has not posted, show message
   if (!userHasPosted) {
