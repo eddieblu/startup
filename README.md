@@ -109,7 +109,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **User registration** - Users can be registered.
 - [x] **User login and logout** - Once registered, users can login and logout.
 - [x] **Stores data in MongoDB** - Users and posts are stored in MongoDB from `service/database.js`.
-- [x] **Stores credentials in MongoDB** - User accounts have username and a hashed password stored in MongoDB.
+- [x] **Stores credentials in MongoDB** - User accounts and auth information stored in MongoDB from `service/database.js`.
 - [x] **Restricts functionality based on authentication** - User cannot perform any functionality without authentication.
 
 ## 🚀 WebSocket deliverable
