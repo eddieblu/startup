@@ -212,4 +212,25 @@ function setAuthCookie(res, authToken) {
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
+    scheduleDailyDelete();
 });
+
+function scheduleDailyDelete() {
+    const now = new Date();
+
+    const nextMidnight = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate() + 1, // tomorrow
+      0, // 0 hours
+      0, // 0 minutes
+      0  // 0 seconds
+    );
+    const msUntilMidnight = nextMidnight - now;
+  
+    setTimeout(async () => {
+      await DB.deleteAllPosts();
+  
+      scheduleDailyDelete();
+    }, msUntilMidnight);
+  }

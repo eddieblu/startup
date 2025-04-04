@@ -4,8 +4,8 @@ const config = require('./dbConfig.json');
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
 const db = client.db('startup');
-const userCollection = db.collection('user');
-const postCollection = db.collection('post');
+const userCollection = db.collection('users');
+const postCollection = db.collection('posts');
 
 // This will asynchronously test the connection and exit the process if it fails
 (async function testConnection() {
@@ -97,6 +97,11 @@ async function toggleHeart(postId, username) {
     }
 }
 
+async function deleteAllPosts() {
+    const result = await postCollection.deleteMany({});
+    console.log(`Deleted ${result.deletedCount} posts at ${new Date().toLocaleString()}`);
+  }
+
 module.exports = {
     getUser,
     getUserByToken,
@@ -108,5 +113,6 @@ module.exports = {
     getPostById,
     getPostByUsername,
     updatePostContent,
-    toggleHeart
+    toggleHeart,
+    deleteAllPosts
 }
