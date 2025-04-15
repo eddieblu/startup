@@ -1,10 +1,10 @@
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
-const express = require('express');
 const uuid = require('uuid');
+const { WebSocketServer } = require('ws');
+const express = require('express');
 const app = express();
 const DB = require('./database.js');
-
 const authCookieName = 'token';
 
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
@@ -117,8 +117,6 @@ apiRouter.get('/posts/user/:username', verifyAuth, async (req, res) => {
         });
     }
 
-    // TODO: is post and streak got from database that wasn't from local data ? 
-    // (same potential future fix as setting hearts in .get/posts)
     const postAndStreak = {
         ...userPost,
         isHeartedByCurrentUser: userPost.heartedBy.includes(user.username),
@@ -167,16 +165,15 @@ apiRouter.patch('/posts/:id/heart', verifyAuth, async (req, res) => {
 });
 
 // Default error handler
-app.use(function (err, req, res, _next) {
+app.use(function (err, _req, res, _next) {
     res.status(500).send({ type: err.name, message: err.message });
 });
 
 // Return the application's default page if the path is unknown
-app.use((req, res) => {
+app.use((_req, res) => {
     res.sendFile('index.html', { root: 'public' });
 });
 
-// Helper function
 async function findUser(field, value) {
     if (!value) return null;
 
@@ -186,7 +183,6 @@ async function findUser(field, value) {
     return DB.getUser(value);
 }
 
-// Helper function
 async function registerUser(username, password) {
     const passwordHash = await bcrypt.hash(password, 10);
 
@@ -210,27 +206,57 @@ function setAuthCookie(res, authToken) {
     });
 }
 
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-    scheduleDailyDelete();
-});
-
 function scheduleDailyDelete() {
     const now = new Date();
 
     const nextMidnight = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate() + 1, // tomorrow
-      0, // 0 hours
-      0, // 0 minutes
-      0  // 0 seconds
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate() + 1, // tomorrow
+        0, // 0 hours
+        0, // 0 minutes
+        0  // 0 seconds
     );
     const msUntilMidnight = nextMidnight - now;
-  
+
     setTimeout(async () => {
-      await DB.deleteAllPosts();
-  
-      scheduleDailyDelete();
+        await DB.deleteAllPosts();
+
+        scheduleDailyDelete();
     }, msUntilMidnight);
-  }
+}
+
+const server = app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+    scheduleDailyDelete();
+});
+
+const socketServer = new WebSocketServer({ server });
+
+socketServer.on('connection', (socket) => {
+    socket.isAlive = true;
+  
+    // Forward messages to everyone except the sender
+    socket.on('message', function message(data) {
+      socketServer.clients.forEach(function each(client) {
+        if (client !== socket && client.readyState === WebSocket.OPEN) {
+          client.send(data);
+        }
+      });
+    });
+  
+    // Respond to pong messages by marking the connection alive
+    socket.on('pong', () => {
+      socket.isAlive = true;
+    });
+  });
+  
+  // Periodically send out a ping message to make sure clients are alive
+  setInterval(() => {
+    socketServer.clients.forEach(function each(client) {
+      if (client.isAlive === false) return client.terminate();
+  
+      client.isAlive = false;
+      client.ping();
+    });
+  }, 10000);
