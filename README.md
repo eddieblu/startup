@@ -94,7 +94,7 @@ For this deliverable I did the following:
 
 ## 🚀 Service deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+For this deliverable I did the following:
 
 - [x] **Node.js/Express HTTP service** - Installed Express with NPM. Default port on 4000.js`
 - [x] **Static middleware for frontend** - Simple endpoints in service/index
@@ -104,7 +104,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ## 🚀 DB/Login deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+For this deliverable I did the following:
 
 - [x] **User registration** - Users can be registered.
 - [x] **User login and logout** - Once registered, users can login and logout.
