@@ -1,19 +1,27 @@
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
-const uuid = require('uuid');
-const { WebSocketServer } = require('ws');
 const express = require('express');
+const uuid = require('uuid');
 const app = express();
 const DB = require('./database.js');
+const { peerProxy } = require('./peerProxy.js');
+
 const authCookieName = 'token';
 
+// The service port may be set on the command line
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
+// JSON body parsing using built-in middleware
 app.use(express.json());
+
+// Use the cookie parser middleware for tracking authentication tokens
 app.use(cookieParser());
+
+// Serve up the applications static content
 app.use(express.static('public'));
 
-var apiRouter = express.Router();
+// Router for service endpoints
+const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 // POST /api/auth/register -- Register a new user
@@ -81,6 +89,7 @@ apiRouter.post('/posts', verifyAuth, async (req, res) => {
     };
 
     await DB.addPost(newPost);
+    realtime.broadcast({ type: 'new-post', post: newPost });
 
     return res.status(201).json(newPost);
 });
@@ -142,7 +151,11 @@ apiRouter.patch('/posts/:id/content', verifyAuth, async (req, res) => {
         await DB.updatePostContent(req.params.id, req.body.content);
     };
 
-    return res.json(await DB.getPostById(req.params.id));
+    const updatedPost = await DB.getPostById(req.params.id);
+
+    realtime.broadcast({ type: 'edit-post', post: updatedPost });
+
+    return res.json(updatedPost);
 });
 
 // PATCH /api/posts/:id/heart
@@ -157,6 +170,8 @@ apiRouter.patch('/posts/:id/heart', verifyAuth, async (req, res) => {
     await DB.toggleHeart(req.params.id, user.username);
 
     const updatedPost = await DB.getPostById(req.params.id);
+
+    realtime.broadcast({ type: 'heart', post: updatedPost });
 
     return res.json({
         ...updatedPost,
@@ -226,37 +241,9 @@ function scheduleDailyDelete() {
     }, msUntilMidnight);
 }
 
-const server = app.listen(port, () => {
+const httpService = app.listen(port, () => {
     console.log(`Listening on port ${port}`);
     scheduleDailyDelete();
 });
 
-const socketServer = new WebSocketServer({ server });
-
-socketServer.on('connection', (socket) => {
-    socket.isAlive = true;
-  
-    // Forward messages to everyone except the sender
-    socket.on('message', function message(data) {
-      socketServer.clients.forEach(function each(client) {
-        if (client !== socket && client.readyState === WebSocket.OPEN) {
-          client.send(data);
-        }
-      });
-    });
-  
-    // Respond to pong messages by marking the connection alive
-    socket.on('pong', () => {
-      socket.isAlive = true;
-    });
-  });
-  
-  // Periodically send out a ping message to make sure clients are alive
-  setInterval(() => {
-    socketServer.clients.forEach(function each(client) {
-      if (client.isAlive === false) return client.terminate();
-  
-      client.isAlive = false;
-      client.ping();
-    });
-  }, 10000);
+const realtime = peerProxy(httpService);
